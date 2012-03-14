@@ -1,0 +1,9 @@
+<?xml-stylesheet type="text/xsl" href="/isparql/xslt/dynamic-page.xsl"?><iSPARQL xmlns="urn:schemas-openlink-com:isparql" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/">
+<rdf:Description about="#this">
+  <dc:title>DC Childrens Asthma Care Hospitals</dc:title>
+  <dc:creator>George</dc:creator>
+  <dc:description>This SPARQL queries for any instance of type hosp:Hospital where stateCode=DC and cacProvider=1</dc:description>
+</rdf:Description>
+<ISparqlDynamicPage>
+<query maxrows="50">select distinct ?s4 as ?c1  where {?s1 a &lt;http://health.data.gov/def/hospital/Hospital&gt; . ?s1 &lt;http://reference.data.gov/def/govdata/stateCode&gt; ?s2 . filter (?s2 = &lt;http://reference.data.gov/id/state/DC&gt;) .  ?s1 &lt;http://health.data.gov/def/hospital/cacProvider&gt; ?s3 . filter (?s3 = 1) .  ?s1 &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?s4 . }</query><schemas/><namedgraphs/></ISparqlDynamicPage>
+<pragmas/><endpoint>/sparql</endpoint></iSPARQL>

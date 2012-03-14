@@ -1,0 +1,26 @@
+#!/bin/bash
+source ./config.bash
+
+pushd $1 >/dev/null
+toDir="../patched"
+for f in `find . -name "*.rdf"` ; do 
+   fileParts=`echo $f | sed "s/^\(.*\)\/\([^/].*\.rdf\)/\1 \2/"`  
+   filePath=`echo $fileParts | awk '{print $1;}'`
+   fileName=`echo $fileParts | awk '{print $2;}'`
+   newFileName=`echo "$fileName" | sed "s/_\([0-9]*\)_\([0-9]*\)_\([0-9]*\).rdf/_\3_\1_\2.rdf/"`
+   where="$toDir/$filePath"
+   mkdir -p $where
+   cp $f "$where/$newFileName"
+done
+
+for f in `find . -name "*.txt"` ; do 
+   fileParts=`echo $f | sed "s/^\(.*\)\/\([^/].*\.txt\)/\1 \2/"`  
+   filePath=`echo $fileParts | awk '{print $1;}'`
+   fileName=`echo $fileParts | awk '{print $2;}'`
+   newFileName=`echo "$fileName" | sed "s/_\([0-9]*\)_\([0-9]*\)_\([0-9]*\).txt/_\3_\1_\2.txt/"`
+   where="$toDir/$filePath"
+   mkdir -p $where
+   cp $f "$where/$newFileName"
+done
+popd >/dev/null
+

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<?vsp 
+  declare host,gr,page_resource_uri,_S varhar;
+  declare sid,ses_parms  varchar;
+  declare arr any;
+
+  gr := get_keyword ('g', params, '');
+  arr := rfc1808_parse_uri (gr);
+
+  if (arr[0] = '' and arr[1] = '' and arr[2] <> '')
+    gr := 'http://' || gr;
+
+  page_resource_uri := gr;
+  page_resource_uri := replace (page_resource_uri, '%23', '#');
+   
+  _S := page_resource_uri; 
+
+  host := http_request_header (http_request_header (), 'X-Forwarded-Host', null, null);  
+  if (host is null)
+    host := http_request_header (http_request_header (), 'Host');  
+
+  b3s_handle_ses (path, lines, params);
+  sid := connection_get ('sid');
+  b3s_parse_inf (sid, params);
+  ses_parms := b3s_render_ses_params ();
+
+?>
+<head>
+  <base href="http://<?V host ?>/fct/rdfdesc/" />
+  <title>Settings</title>
+
+  <link rel="stylesheet" type="text/css" href="styles/default.css"  charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="styles/highlighter.css" charset="utf-8" />
+  <script type="text/javascript" >
+      var featureList=["tab"];
+  </script>
+  <script type="text/javascript" src="/fct/oat/toolkit/loader.js"></script>
+  <script type="text/javascript" src="s/description.js"></script>
+</head>
+<body>
+  <div id="PG">
+    <div id="HD">
+      <?vsp fct_page_head (); ?>	
+      <ul id="main_menu">
+        <?vsp if (sid is not null) { ?>
+          <li><a href="<?= b3s_render_fct_link() ?>">Facets</a></li>
+        <?vsp } ?>      
+<!--   <li id="mnu_descr"><a href="/describe/?uri=<?U _S ?><?V ses_parms ?>">Description</a></li> -->
+        <li id="mnu_descr"><a href="<?= case when page_resource_uri like 'nodeID://%' then b3s_http_url (page_resource_uri) else page_resource_uri end ?>">Description</a></li>
+        <li id="mnu_usage">
+          <a href="usage.vsp?g=<?U _S ?><?V ses_parms ?>">Usage Statistics</a>
+        </li>
+        <li id="mnu_settings" class="sel"><a  class="sel" href="settings.vsp?uri=<?V page_resource_uri ?><?V ses_parms ?>">Settings</a></li>
+      </ul>
+
+    </div> <!-- #HD -->
+    <div id="MD">
+      <div id="settings">
+        <h1>Settings</h1>
+        <h2>Inference</h2>
+        <table> <!-- yeah I know but life's just too short. -->
+          <tr>
+            <td></td>
+            <td><input class="ckb" id="sas_ckb" type="checkbox" <?= b3s_sas_selected() ?> onchange="javascript:sas_cb();"/> <label class="ckb" for="sas_ckb">owl:sameAs</label></td>
+          </tr>
+          <tr>
+            <td><label for="inf_sel">Inference Rule:</label></td>
+            <td><select id="inf_sel" onchange="javascript:inf_cb();"><?vsp b3s_render_inf_opts (); ?></select></td>
+          </tr>
+        </table>
+      </div> <!-- settings -->
+    </div>
+    <!-- footer -->
+    <div id="FT">
+      <div id="ft_t">
+      </div> <!-- #ft_t -->
+ <!-- #ft_t -->
+    <div id="ft_b">
+    <!--
+      <a href="http://virtuoso.openlinksw.com" title="OpenLink Virtuoso"><img class="powered_by" src="/fct/images/virt_power_no_border.png" alt="Powered by OpenLink Virtuoso"/></a>
+      <a href="http://linkeddata.org/"><img alt="This material is Open Knowledge" src="/fct/images/LoDLogo.gif" style="border-width:0" /></a> &nbsp;
+     -->
+      <a href="http://health.data.gov/sparql"><img alt="W3C Semantic Web Technology" src="/fct/images/sw-sparql-blue.png" style="border-width:0" /></a>
+&nbsp; &nbsp;<a href="/cqld/about.html">About</a>&nbsp; &nbsp;
+<!--
+      <a href="http://www.opendefinition.org/"><img alt="This material is Open Knowledge" src="/fct/images/od_80x15_red_green.png" style="border-width:0" /></a>
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="/fct/images/creativecommons.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 Unported License</a>. <br/>
+      <?vsp fct_virt_info (); ?><br /> 
+      <span class="copyright">Copyright &copy; 2009-2011 OpenLink Software</span>
+-->
+    </div> <!-- #ft_b -->
+    </div> <!-- #FT -->
+  </div> <!-- #PG -->
+</body>
+</html>
+ 
+           

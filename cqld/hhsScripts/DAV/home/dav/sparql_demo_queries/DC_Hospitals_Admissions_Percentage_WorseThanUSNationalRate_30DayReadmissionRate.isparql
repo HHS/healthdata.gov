@@ -1,0 +1,38 @@
+<?xml-stylesheet type="text/xsl" href="/isparql/xslt/dynamic-page.xsl"?><iSPARQL xmlns="urn:schemas-openlink-com:isparql" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/">
+<rdf:Description about="#this">
+  <dc:title>DC_Hospitals_Admissions_Percentage_WorseThanUSNationalRate_30DayReadmissionRate</dc:title>
+  <dc:creator>GT</dc:creator>
+  <dc:description>This query returns the name of any Hospitals in DC that have any Records with values that are worse than the US National 30 Day Readmission Rate and includes the number of Admissions and the percentage of those that are Readmitted within 30 days.  </dc:description>
+</rdf:Description>
+<ISparqlDynamicPage>
+<query maxrows="50">PREFIX hosp: &lt;http://health.data.gov/def/hospital/&gt;
+PREFIX gd: &lt;http://reference.data.gov/def/govdata/&gt;
+PREFIX hoco: &lt;http://health.data.gov/def/hospital-compare/&gt;
+PREFIX comp: &lt;http://health.data.gov/def/compare/&gt; 
+
+select distinct ?Hospital ?Measure ?Metric ?Admissions ?Percentage
+
+where {
+
+?s1 a hosp:Hospital ;
+      rdfs:label ?Hospital ;
+      gd:stateCode ?s2 ;
+      hoco:recordset ?s3 . 
+
+filter (?s2 = &lt;http://reference.data.gov/id/state/DC&gt;) .  
+
+?s3 hoco:record ?Record_URI . 
+
+?Record_URI comp:measure ?s5 ; 
+      gd:percentage ?Percentage ;
+      comp:metric ?Metric_URI ;
+      hoco:admissions ?Admissions .
+
+filter (?s5 = &lt;http://health.data.gov/id/measure/30&gt;). 
+?s5 rdfs:comment ?Measure .
+
+filter (?Metric_URI = &lt;http://health.data.gov/id/metric/15&gt;) .
+?Metric_URI rdfs:comment ?Metric .
+
+} </query><schemas/><namedgraphs/></ISparqlDynamicPage>
+<pragmas/><endpoint>/sparql</endpoint></iSPARQL>

@@ -1,0 +1,44 @@
+#!/bin/bash
+source ./config.bash
+
+echo backup, ETA 15 sec. >&2
+START=$(date +%s)
+
+#
+# Get the date and time, to make a zip filename
+#
+now=`date "+%Y-%m-%d_%H-%M"`
+
+#
+# Create the backup directory, if it doesn't exist
+#
+mkdir "${HHS_BACKUP}" &>/dev/null
+
+#
+# Create a place to store the HHS scripts
+#
+scriptStore="${VIRTUOSO_HOME}/vsp/hhsFileSystem/.hhsScripts"
+mkdir "${scriptStore}" &>/dev/null
+
+#
+# Copy the HHS scripts to the storage directory
+#
+pushd "${HHS_SCRIPT}" &>/dev/null
+for f in * ; do 
+  cp $f "${scriptStore}"
+done
+popd &>/dev/null
+
+#
+# Now store the entire tree of RDF and RDFS to the backup zip
+#
+pushd "${VIRTUOSO_HOME}/vsp" &>/dev/null
+zip -r "${HHS_BACKUP}/${now}.zip" hhsFileSystem >/dev/null
+popd &>/dev/null
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+MIN=$(( $DIFF / 60 ))
+SEC=$(( $DIFF - ($MIN * 60) ))
+echo "backup, Completed in $MIN min $SEC sec." >&2
+

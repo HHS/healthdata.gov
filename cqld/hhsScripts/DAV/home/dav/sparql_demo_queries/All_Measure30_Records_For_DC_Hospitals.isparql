@@ -1,0 +1,23 @@
+<?xml-stylesheet type="text/xsl" href="/isparql/xslt/dynamic-page.xsl"?><iSPARQL xmlns="urn:schemas-openlink-com:isparql" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/">
+<rdf:Description about="#this">
+  <dc:title>All Records on 30 Day Readmission Rates for DC Hospitals</dc:title>
+  <dc:creator>GT</dc:creator>
+  <dc:description>Returns the name of Hospitals in DC and all Records for a specific measure</dc:description>
+</rdf:Description>
+<ISparqlDynamicPage>
+<query maxrows="50">select distinct ?s7 ?s6 ?s4
+
+where {
+
+?s1 a &lt;http://health.data.gov/def/hospital/Hospital&gt; . 
+?s1 rdfs:label ?s7 .
+?s1 &lt;http://reference.data.gov/def/govdata/stateCode&gt; ?s2 . 
+filter (?s2 = &lt;http://reference.data.gov/id/state/DC&gt;) .  
+?s1 &lt;http://health.data.gov/def/hospital-compare/recordset&gt; ?s3 . 
+?s3 &lt;http://health.data.gov/def/hospital-compare/record&gt; ?s4 . 
+?s4 &lt;http://health.data.gov/def/compare/measure&gt; ?s5 . 
+filter (?s5 = &lt;http://health.data.gov/id/measure/30&gt;). 
+?s5 rdfs:comment ?s6 .
+
+} </query><schemas/><namedgraphs/></ISparqlDynamicPage>
+<pragmas/><endpoint>/sparql</endpoint></iSPARQL>

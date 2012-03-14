@@ -1,0 +1,26 @@
+<?xml-stylesheet type="text/xsl" href="/isparql/xslt/dynamic-page.xsl"?><iSPARQL xmlns="urn:schemas-openlink-com:isparql" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/">
+<rdf:Description about="#this">
+  <dc:title>DC CAC Hospital Address and Phone Number</dc:title>
+  <dc:creator>gt</dc:creator>
+  <dc:description>This query returns the Name, Address, State and Telephone number of hosp:Hospital instances that are in DC and are Childrens Asthma Care providers.</dc:description>
+</rdf:Description>
+<ISparqlDynamicPage>
+<query maxrows="50">select distinct ?Hospital ?Address ?State ?Telephone
+
+where {
+
+?s1 a &lt;http://health.data.gov/def/hospital/Hospital&gt; . 
+?s1 &lt;http://reference.data.gov/def/govdata/stateCode&gt; ?s2 . 
+filter (?s2 = &lt;http://reference.data.gov/id/state/DC&gt;) .  
+?s1 &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?Hospital .
+?s2 &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?State .
+?s1 &lt;http://health.data.gov/def/hospital/cacProvider&gt; ?s4 . 
+filter (?s4 = 1) .  
+?s1 &lt;http://health.data.gov/def/hospital/site&gt; ?s5 . 
+?s5 &lt;http://www.w3.org/ns/org#siteAddress&gt; ?s6 . 
+?s6 &lt;http://www.w3.org/2006/vcard/ns#tel&gt; ?Telephone .
+?s6 &lt;http://www.w3.org/2006/vcard/ns#street-address&gt; ?Address .
+
+}
+</query><schemas/><namedgraphs/></ISparqlDynamicPage>
+<pragmas/><endpoint>/sparql</endpoint></iSPARQL>

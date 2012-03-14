@@ -1,0 +1,54 @@
+<?xml-stylesheet type="text/xsl" href="/isparql/xslt/dynamic-page.xsl"?><iSPARQL xmlns="urn:schemas-openlink-com:isparql" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/">
+<rdf:Description about="#this">
+  <dc:title>Percentage_of_Admissions_values_from_Records_of_DC_Hospitals_having_ThirtyDayReadmissionRates_WorseThanUSNationalRate</dc:title>
+  <dc:creator>gt</dc:creator>
+  <dc:description>Percentage_of_Admissions_values_from_Records_of_DC_Hospitals_having_ThirtyDayReadmissionRates_WorseThanUSNationalRate</dc:description>
+</rdf:Description>
+<ISparqlDynamicPage>
+<query maxrows="50">PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+SELECT DISTINCT ?Hospital ?Measure ?Percentage ?Metric ?Admissions
+WHERE {
+  ?s1 a &lt;http://health.data.gov/def/hospital/Hospital&gt; ; 
+      rdfs:label ?Hospital ; 
+      &lt;http://reference.data.gov/def/govdata/stateCode&gt; ?s2 ; 
+      &lt;http://health.data.gov/def/hospital-compare/recordset&gt; ?s3 . 
+  ?s3 &lt;http://health.data.gov/def/hospital-compare/record&gt; ?Record_URI . 
+  ?Record_URI &lt;http://health.data.gov/def/compare/measure&gt; ?s5 . 
+  ?s5 rdfs:comment ?Measure . 
+  ?Record_URI &lt;http://reference.data.gov/def/govdata/percentage&gt; ?Percentage ; 
+              &lt;http://health.data.gov/def/compare/metric&gt; ?Metric_URI . 
+  ?Metric_URI rdfs:comment ?Metric . 
+  ?Record_URI &lt;http://health.data.gov/def/hospital-compare/admissions&gt; ?Admissions . 
+}
+</query><schemas/><namedgraphs/></ISparqlDynamicPage>
+<pragmas/><endpoint>/sparql</endpoint><canvas>&amp;lt;sparql_design&amp;gt;
+	&amp;lt;nodes&amp;gt;
+		&amp;lt;node x="452.4537683228228" y="289.31301440450994" type="0" group="-1" visible="0"&amp;gt;?s1,&amp;amp;lt;http://health.data.gov/def/hospital/Hospital&amp;amp;gt;&amp;lt;/node&amp;gt;
+		&amp;lt;node x="551.5886473100779" y="257.57968888816646" type="0" group="-1" visible="1"&amp;gt;?Hospital,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="483.0476867972207" y="323.71249269105203" type="0" group="-1" visible="0"&amp;gt;?s2,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="506.4269191300485" y="224.14161653290716" type="0" group="-1" visible="0"&amp;gt;?s3,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="310" y="180.5" type="0" group="-1" visible="0"&amp;gt;?Record_URI,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="231.13270337953213" y="280.4919807421594" type="0" group="-1" visible="0"&amp;gt;?s5,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="308.57556956918233" y="317.24597551938234" type="0" group="-1" visible="1"&amp;gt;?Measure,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="174.27313005767428" y="226.29614639317438" type="0" group="-1" visible="1"&amp;gt;?Percentage,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="182.0655171344677" y="136.45091450759043" type="0" group="-1" visible="0"&amp;gt;?Metric_URI,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="436.10173029827735" y="135.11934182416869" type="0" group="-1" visible="1"&amp;gt;?Admissions,&amp;lt;/node&amp;gt;
+		&amp;lt;node x="255.19975554684538" y="101.09687775893948" type="0" group="-1" visible="1"&amp;gt;?Metric,&amp;lt;/node&amp;gt;
+	&amp;lt;/nodes&amp;gt;
+	&amp;lt;edges&amp;gt;
+		&amp;lt;edge type="0" node1="0"  node2="1" visible="0"&amp;gt;rdfs:label,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="0"  node2="2" visible="0"&amp;gt;&amp;amp;lt;http://reference.data.gov/def/govdata/stateCode&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="0"  node2="3" visible="0"&amp;gt;&amp;amp;lt;http://health.data.gov/def/hospital-compare/recordset&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="3"  node2="4" visible="0"&amp;gt;&amp;amp;lt;http://health.data.gov/def/hospital-compare/record&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="4"  node2="5" visible="0"&amp;gt;&amp;amp;lt;http://health.data.gov/def/compare/measure&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="5"  node2="6" visible="0"&amp;gt;rdfs:comment,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="4"  node2="7" visible="0"&amp;gt;&amp;amp;lt;http://reference.data.gov/def/govdata/percentage&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="4"  node2="8" visible="0"&amp;gt;&amp;amp;lt;http://health.data.gov/def/compare/metric&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="4"  node2="9" visible="0"&amp;gt;&amp;amp;lt;http://health.data.gov/def/hospital-compare/admissions&amp;amp;gt;,&amp;lt;/edge&amp;gt;
+		&amp;lt;edge type="0" node1="8"  node2="10" visible="0"&amp;gt;rdfs:comment,&amp;lt;/edge&amp;gt;
+	&amp;lt;/edges&amp;gt;
+	&amp;lt;groups&amp;gt;
+	&amp;lt;/groups&amp;gt;
+&amp;lt;/sparql_design&amp;gt;
+</canvas></iSPARQL>
