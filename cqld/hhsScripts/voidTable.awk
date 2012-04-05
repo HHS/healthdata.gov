@@ -286,15 +286,15 @@ BEGIN {}
    label = "Q";
 }
 /^Outpatient_FinalFile_Quarters/ {
-   abbreviation = "q";
+   abbreviation = "oq";
    topic = "http://health.data.gov/def/compare/Measure";
-   title = "Quarters (Q)";
+   title = "Outpatient Quarters (Q)";
    description = "Quarterly reporting information for various measures.";
    vocab = "http://health.data.gov/def/compare";
    uriSpace = "http://health.data.gov/id/measure";
    exampleResource = "http://health.data.gov/def/compare/ProcessMeasure";
    comment = "Quarterly reporting information for various measures.";
-   label = "Q";
+   label = "OQ";
 }
 /^final_ahrq_outcome_national/ {
    abbreviation = "ahrqn";
