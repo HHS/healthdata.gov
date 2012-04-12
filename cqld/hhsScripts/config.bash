@@ -31,6 +31,13 @@ ISQL_PASSWORD="dba"
 VIRTUOSO_HOME="/Applications/OpenLinkVirtuoso/Virtuoso6.2"
 
 ##############################
+# ISQL_CMD is the command used for this instance of Virtuoso 
+##############################
+# ISQL_CMD="/u02/virtuoso/bin/isql"
+
+ISQL_CMD="${VIRTUOSO_HOME}/bin/isql"
+
+##############################
 # HHS_SCRIPT is the directory that contains all of the HHS scripts
 ##############################
 # HHS_SCRIPT="${VIRTUOSO_HOME}/hhsScript"

@@ -18,7 +18,7 @@ for f in `find . -name "*.rdf"` ; do
    filePath=`echo $fileParts | awk '{print $1;}'`
    fileName=`echo $fileParts | awk '{print $2;}'`
    fileBase=`echo "$fileName" | awk -F. '{print $1;}'`
-   abbrev=`echo "$fileName" | awk -f /var/lib/virtuoso-opensource-6.1/hhsScripts/voidTable.awk get=abbreviation`
+   abbrev=`echo "$fileName" | awk -f ${VIRTUOSO_HOME}/hhsScripts/voidTable.awk get=abbreviation`
    pubDate=`echo "$fileName" | sed "s/^.*_\([0-9]*\)_\([0-9]*\)_\([0-9]*\).rdf/\1-\2-\3/"`
    where="$toDir/$abbrev/$pubDate"
    mkdir -p $where
