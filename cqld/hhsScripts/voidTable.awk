@@ -16,7 +16,7 @@ BEGIN {}
    title = "Childrens Asthma Care Providers (CACP)";
    description = "Information about hospitals that provide care for children's asthma.";
    vocab = "http://health.data.gov/def/compare";
-   uriSpace = "http://health.data.gov/dataset/cacp/2010-11-24/recordset";
+   uriSpace = "http://health.data.gov/id/hospital";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
    comment = "Information about hospitals that provide care for children's asthma.";
    label = "CACP";
@@ -38,7 +38,7 @@ BEGIN {}
    title = "Provider Payment Volume (PPV)";
    description = "Hospital payment volumes.";
    vocab = "http://health.data.gov/def/hospital";
-   uriSpace = "http://health.data.gov/dataset/ppv/2010-08-26/recordset";
+   uriSpace = "http://health.data.gov/id/hospital";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
    comment = "Hospital payment volumes.";
    label = "PPV";
@@ -49,7 +49,7 @@ BEGIN {}
    title = "National Payment Volume (NPV)";
    description = "US payment volumes.";
    vocab = "http://health.data.gov/def/govdata";
-   uriSpace = "http://health.data.gov/dataset/npv/2010-08-26/recordset";
+   uriSpace = "http://health.data.gov/id/country/US";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
    comment = "US payment volumes.";
    label = "NPV";
@@ -60,7 +60,7 @@ BEGIN {}
    title = "State Payment Volume (SPV)";
    description = "State payment volumes.";
    vocab = "http://health.data.gov/def/govdata";
-   uriSpace = "http://health.data.gov/dataset/spv/2010-08-26/recordset";
+   uriSpace = "http://health.data.gov/id/state";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
    comment = "State payment volumes.";
    label = "SPV";
@@ -328,6 +328,39 @@ BEGIN {}
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
    comment = "AHRQ is a collection of Patient Safety and Inpatient Quality Indicators";
    label = "AHRQS";
+}
+/^final_hai_state/ {
+   abbreviation = "hais";
+   topic = "http://reference.data.gov/def/govdata/State";
+   title = "Healthcare Acquired Infections, State data (HAIS)";
+   description = "State data regarding Healtcare Acquired Infections";
+   vocab = "http://health.data.gov/def/hospital-compare";
+   uriSpace = "http://health.data.gov/id/state";
+   exampleResource = "http://health.data.gov/def/hospital-compare/Record";
+   comment = "State data regarding Healtcare Acquired Infections";
+   label = "HAIS";
+}
+/^final_hai_national/ {
+   abbreviation = "hain";
+   topic = "http://reference.data.gov/def/govdata/Country";
+   title = "Healthcare Acquired Infections, National data (HAIN)";
+   description = "National data regarding Healtcare Acquired Infections";
+   vocab = "http://health.data.gov/def/hospital-compare";
+   uriSpace = "http://health.data.gov/id/country/US";
+   exampleResource = "http://health.data.gov/def/hospital-compare/Record";
+   comment = "National data regarding Healtcare Acquired Infections";
+   label = "HAIN";
+}
+/^final_hai_hospital/ {
+   abbreviation = "hai";
+   topic = "http://health.data.gov/def/hospital/Hospital";
+   title = "Healthcare Acquired Infections (HAIS)";
+   description = "Hospital data regarding Healtcare Acquired Infections";
+   vocab = "http://health.data.gov/def/hospital-compare";
+   uriSpace = "http://health.data.gov/id/hospital";
+   exampleResource = "http://health.data.gov/def/hospital-compare/Record";
+   comment = "Hospital data regarding Healtcare Acquired Infections";
+   label = "HAI";
 }
 END {
    if (get=="abbreviation") print abbreviation;
