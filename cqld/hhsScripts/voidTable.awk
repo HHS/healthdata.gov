@@ -332,35 +332,35 @@ BEGIN {}
 /^final_hai_state/ {
    abbreviation = "hais";
    topic = "http://reference.data.gov/def/govdata/State";
-   title = "Healthcare Acquired Infections, State data (HAIS)";
-   description = "State data regarding Healtcare Acquired Infections";
+   title = "Healthcare-Associated Infections, State data (HAIS)";
+   description = "State data regarding Healtcare-Associated Infections";
    vocab = "http://health.data.gov/def/hospital-compare";
    uriSpace = "http://health.data.gov/id/state";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
-   comment = "State data regarding Healtcare Acquired Infections";
+   comment = "State data regarding Healtcare-Associated Infections";
    label = "HAIS";
 }
 /^final_hai_national/ {
    abbreviation = "hain";
    topic = "http://reference.data.gov/def/govdata/Country";
-   title = "Healthcare Acquired Infections, National data (HAIN)";
-   description = "National data regarding Healtcare Acquired Infections";
+   title = "Healthcare-Associated Infections, National data (HAIN)";
+   description = "National data regarding Healtcare-Associated Infections";
    vocab = "http://health.data.gov/def/hospital-compare";
    uriSpace = "http://health.data.gov/id/country/US";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
-   comment = "National data regarding Healtcare Acquired Infections";
+   comment = "National data regarding Healtcare-Associated Infections";
    label = "HAIN";
 }
 /^final_hai_hospital/ {
-   abbreviation = "hai";
+   abbreviation = "haip";
    topic = "http://health.data.gov/def/hospital/Hospital";
-   title = "Healthcare Acquired Infections (HAIS)";
-   description = "Hospital data regarding Healtcare Acquired Infections";
+   title = "Healthcare-Associated Infections, Provider data (HAIP)";
+   description = "Provider data regarding Healthcare-Associated Infections";
    vocab = "http://health.data.gov/def/hospital-compare";
    uriSpace = "http://health.data.gov/id/hospital";
    exampleResource = "http://health.data.gov/def/hospital-compare/Record";
-   comment = "Hospital data regarding Healtcare Acquired Infections";
-   label = "HAI";
+   comment = "Provider data regarding Healtcare-Associated Infections";
+   label = "HAIP";
 }
 END {
    if (get=="abbreviation") print abbreviation;
