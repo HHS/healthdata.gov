@@ -1,5 +1,5 @@
 BEGIN {}
-/^(Final_)?CAC_National_File/ {
+/^([Ff]inal_)?[Cc][Aa][Cc]_[Nn]ational_[Ff]ile/ {
    abbreviation = "cacn";
    topic = "http://reference.data.gov/def/govdata/Country";
    title = "Childrens Asthma Care National (CACN)";
@@ -10,7 +10,7 @@ BEGIN {}
    comment = "National data regarding children's asthma care measures.";
    label = "CACN";
 }
-/^(Final_)?CAC_Provider_File/ {
+/^([Ff]inal_)?[Cc][Aa][Cc]_[Pp]rovider_[Ff]ile/ {
    abbreviation = "cacp";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Childrens Asthma Care Providers (CACP)";
@@ -21,7 +21,7 @@ BEGIN {}
    comment = "Information about hospitals that provide care for children's asthma.";
    label = "CACP";
 }
-/^(Final_)?CAC_State_File/ {
+/^([Ff]inal_)?[Cc][Aa][Cc]_[Ss]tate_[Ff]ile/ {
    abbreviation = "cacs";
    topic = "http://reference.data.gov/def/govdata/State";
    title = "Childrens Asthma Care State (CACS)";
@@ -32,7 +32,7 @@ BEGIN {}
    comment = "State data regarding children's asthma care measures.";
    label = "CACS";
 }
-/^[Ff]inal_Provider_Payment_Volume/ {
+/^[Ff]inal_[Pp]rovider_[Pp]ayment_[Vv]olume/ {
    abbreviation = "ppv";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Provider Payment Volume (PPV)";
@@ -43,7 +43,7 @@ BEGIN {}
    comment = "Hospital payment volumes.";
    label = "PPV";
 }
-/^[Ff]inal_National_Payment_Volume/ {
+/^[Ff]inal_[Nn]ational_[Pp]ayment_[Vv]olume/ {
    abbreviation = "npv";
    topic = "http://reference.data.gov/def/govdata/Country";
    title = "National Payment Volume (NPV)";
@@ -54,7 +54,7 @@ BEGIN {}
    comment = "US payment volumes.";
    label = "NPV";
 }
-/^[Ff]inal_State_Payment_Volume/ {
+/^[Ff]inal_[Ss]tate_[Pp]ayment_[Vv]olume/ {
    abbreviation = "spv";
    topic = "http://reference.data.gov/def/govdata/State";
    title = "State Payment Volume (SPV)";
@@ -65,7 +65,7 @@ BEGIN {}
    comment = "State payment volumes.";
    label = "SPV";
 }
-/^(Final_)?CACOnly_Providers/ {
+/^([Ff]inal_)?[Cc][Aa][Cc][Oo]nly_[Pp]roviders/ {
    abbreviation = "cacop";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Childrens Asthma Care Only Providers (CACOP)";
@@ -76,7 +76,7 @@ BEGIN {}
    comment = "Hospitals that are Childrens Asthma Care providers.";
    label = "CACOP";
 }
-/^Hopqdrp_finalfile_hsp_characteristics/ {
+/^[Hh]opqdrp_finalfile_hsp_characteristics/ {
    abbreviation = "hophc";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Hospital Outpatient Quality Data Reporting Program - Hospital Characteristics (HOPHC)";
@@ -98,7 +98,7 @@ BEGIN {}
    comment = "General hospital characteristic information.";
    label = "HOSP";
 }
-/^Final_Hsp_[cC]har_Payment_Volume/ {
+/^[Ff]inal_[Hh]sp_[cC]har_[Pp]ayment_[Vv]olume/ {
    abbreviation = "hpv";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Hospital Payment Volume (HPV)";
@@ -109,7 +109,7 @@ BEGIN {}
    comment = "Payment volume and hospital characteristic information.";
    label = "HPV";
 }
-/^(Final_)?MPVonly_Providers/ {
+/^([Ff]inal_)?[Mm][Pp][Vv]only_[Pp]roviders/ {
    abbreviation = "mpvop";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Medicare Payment Volume Only Providers (MPVOP)";
@@ -164,7 +164,7 @@ BEGIN {}
    comment = "Structural measurements for hospitals.";
    label = "SM";
 }
-/^Hopqdrp_finalfile_hosp_perf/ {
+/^[Hh]opqdrp_finalfile_hosp_perf/ {
    abbreviation = "hophp";
    topic = "http://health.data.gov/def/hospital/Hospital";
    title = "Hospital Outpatient Quality Data Reporting Program - Hospital Performance (HOPHP)";
@@ -175,7 +175,7 @@ BEGIN {}
    comment = "Survey information about hospital HOPQDRP performance measures and metrics.";
    label = "HOPHP";
 }
-/^Hopqdrp_finalfile_natl_perf/ {
+/^[Hh]opqdrp_finalfile_natl_perf/ {
    abbreviation = "hopnp";
    topic = "http://reference.data.gov/def/govdata/Country";
    title = "Hospital Outpatient Quality Data Reporting Program - National Outcomes (HOPNP)";
@@ -186,7 +186,7 @@ BEGIN {}
    comment = "HOPQDRP national outcome performance measures and metrics.";
    label = "HOPNP";
 }
-/^Hopqdrp_finalfile_state_perf/ {
+/^[Hh]opqdrp_finalfile_state_perf/ {
    abbreviation = "hopsp";
    topic = "http://reference.data.gov/def/govdata/State";
    title = "Hospital Outpatient Quality Data Reporting Program - State Performance";
@@ -241,7 +241,7 @@ BEGIN {}
    comment = "Survey information about US performance measures and metrics.";
    label = "HN";
 }
-/^Hopqdrp_finalfile_quarters/ {
+/^[Hh]opqdrp_finalfile_quarters/ {
    abbreviation = "hopqdrpq";
    topic = "http://health.data.gov/def/compare/ProcessMeasure";
    title = "Hospital Outpatient Quality Data Reporting Program Quarters (HOPQDRPQ)";
@@ -285,7 +285,7 @@ BEGIN {}
    comment = "Quarterly reporting information for various measures.";
    label = "Q";
 }
-/^Outpatient_FinalFile_Quarters/ {
+/^[Oo]utpatient_[Ff]inal[Ff]ile_[Qq]uarters/ {
    abbreviation = "oq";
    topic = "http://health.data.gov/def/compare/Measure";
    title = "Outpatient Quarters (Q)";
