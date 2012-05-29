@@ -2329,6 +2329,145 @@ DB.DBA.VHOST_DEFINE (
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
+-- /
+--              Rewrite Rules in the health.data.gov interface
+--
+-- Anything that ends in .html is sent to the facet browser for rendering.
+-- Other filename extensions include:
+--    .n3, .ttl, .json, .csv, .rdf, .txt, .atom, and .ajson
+-- 
+-- if a resource does not have a file name extension, and if the 
+-- Accept Header has been specified, then these rules will redirect
+-- to the same resource with the proper filename extension.
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+DB.DBA.VHOST_REMOVE (
+	 lhost=>'*ini*',
+	 vhost=>'health.data.gov',
+	 lpath=>'/'
+);
+
+DB.DBA.VHOST_DEFINE (
+	 lhost=>'*ini*',
+	 vhost=>'health.data.gov',
+	 lpath=>'/',
+	 ppath=>'/',
+	 is_dav=>0,
+	 def_page=>'',
+	 vsp_user=>'dba',
+	 ses_vars=>0,
+	 opts=>vector ('xml_templates', 'yes', 'browse_sheet', '', 'url_rewrite', 'http_rule_list_14'),
+	 is_default_host=>0
+);
+
+
+    
+
+DB.DBA.URLREWRITE_CREATE_RULELIST ( 
+'http_rule_list_14', 1, 
+  vector ('http_rule_275', 'http_rule_276', 'http_rule_277', 'http_rule_278', 'http_rule_279', 'http_rule_280', 'http_rule_281'));
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_275', 1, 
+  '/(dataset).[rR][dD][fF]$', 
+vector (), 
+0, 
+'http://health.data.gov/sparql?default-graph-uri=&query=define+sql%%3Adescribe-mode+%%22CBD%%22+DESCRIBE+%%3Chttp%%3A%%2F%%2Fhealth.data.gov%%2Fdataset%%3E&format=text%%2Fplain&timeout=0', 
+vector (), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_276', 1, 
+  '/(dataset)[.][nN]3$', 
+vector ('par_1'), 
+1, 
+'/sparql?query=define%%20sql%%3Adescribe-mode%%20%%22CBD%%22%%20describe%%20%%3Chttp%%3A%%2F%%2F^{URIQADefaultHost}^%%2F%U%%3E&format=text/rdf%%2Bn3', 
+vector ('par_1'), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_277', 1, 
+  '/(dataset)[.][tT][tT][lL]$', 
+vector ('par_1'), 
+1, 
+'/sparql?query=define%%20sql%%3Adescribe-mode%%20%%22CBD%%22%%20describe%%20%%3Chttp%%3A%%2F%%2F^{URIQADefaultHost}^%%2F%U%%3E&format=text/rdf%%2Bn3', 
+vector ('par_1'), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_278', 1, 
+  '/(dataset)[.][jJ][sS][oO][nN]$', 
+vector ('par_1'), 
+1, 
+'/sparql?query=define%%20sql%%3Adescribe-mode%%20%%22CBD%%22%%20describe%%20%%3Chttp%%3A%%2F%%2F^{URIQADefaultHost}^%%2F%U%%3E&format=application/json', 
+vector ('par_1'), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_279', 1, 
+  '/(dataset)[.][rR][jJ][sS][oO][nN]$', 
+vector ('par_1'), 
+1, 
+'/sparql?query=define%%20sql%%3Adescribe-mode%%20%%22CBD%%22%%20describe%%20%%3Chttp%%3A%%2F%%2F^{URIQADefaultHost}^%%2F%U%%3E&format=application/rdf%%2Bjson', 
+vector ('par_1'), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_280', 1, 
+  '/(dataset)[.][cC][sS][vV]$', 
+vector ('par_1'), 
+1, 
+'/sparql?query=define%%20sql%%3Adescribe-mode%%20%%22CBD%%22%%20describe%%20%%3Chttp%%3A%%2F%%2F^{URIQADefaultHost}^%%2F%U%%3E&format=text/csv', 
+vector ('par_1'), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 
+'http_rule_281', 1, 
+  '/(dataset)[.][tT][xX][tT]$', 
+vector ('par_1'), 
+1, 
+'/sparql?query=define%%20sql%%3Adescribe-mode%%20%%22CBD%%22%%20describe%%20%%3Chttp%%3A%%2F%%2F^{URIQADefaultHost}^%%2F%U%%3E&format=text/plain', 
+vector ('par_1'), 
+NULL, 
+NULL, 
+1, 
+0, 
+'' 
+);
+
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
 -- /dataset 
 --              Rewrite Rules in the health.data.gov interface
 --
