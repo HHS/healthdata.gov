@@ -53,6 +53,16 @@
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --
+-- Change the default for links in facet.vad
+-- 
+-- This turns off the use of rdfs:label for facet browsing links
+-- As such it will default back to dcterms:title
+--
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+registry_set( 'fct_desc_value_labels', '0' );
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+--
 -- DB.DBA.REDIR_DECODE_URL Stored Procedure
 -- 
 -- The /describe Rewrite Rules need this procedure to decode a 
