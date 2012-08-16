@@ -2,29 +2,15 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:mcare="http://health.data.gov/def/medicare/"
+    xmlns="http://health.data.gov/def/medicare/"
   xml:base="http://health.data.gov/def/medicare/">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
-    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Medicare Vocabulary</dc:title>
-    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Centers for Medicare and Medicaid Services</dc:contributor>
-    <rdfs:isDefinedBy rdf:resource=""/>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >1.0</owl:versionInfo>
-    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >US Department of Health and Human Services</dc:contributor>
+    >Medicare - CQLD Component Vocabulary - Version 0.1</owl:versionInfo>
   </owl:Ontology>
-  <rdfs:Class rdf:about="http://health.data.gov/def/medicare/MS-DRG">
-    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Medicare Severity Diagnostic Related Group</rdfs:comment>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >MS-DRG</rdfs:label>
-  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/medicare/MS-DRG"/>
 </rdf:RDF>
 
 <!-- Created with TopBraid -->

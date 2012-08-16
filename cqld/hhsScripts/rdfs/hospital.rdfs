@@ -1,84 +1,34 @@
 <?xml version="1.0"?>
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:hosp="http://health.data.gov/def/hospital/"
+    xmlns="http://health.data.gov/def/hospital/"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xml:base="http://health.data.gov/def/hospital/">
   <owl:Ontology rdf:about="">
-    <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
-    <rdfs:isDefinedBy rdf:resource=""/>
-    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >1.0</owl:versionInfo>
-    <owl:imports rdf:resource="http://www.w3.org/2006/vcard/ns"/>
-    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >US Department of Health and Human Services</dc:contributor>
-    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Centers for Medicare and Medicaid Services</dc:contributor>
-    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Hospital Vocabulary</dc:title>
     <owl:imports rdf:resource="http://www.w3.org/ns/org"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Hospital - CQLD Component Vocabulary - Version 0.1</owl:versionInfo>
+    <owl:imports rdf:resource="http://www.w3.org/2006/vcard/ns"/>
   </owl:Ontology>
-  <rdfs:Class rdf:about="http://health.data.gov/def/hospital/HospitalOwnershipType">
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >HospitalOwnershipType</rdfs:label>
-  </rdfs:Class>
-  <rdfs:Class rdf:about="http://health.data.gov/def/hospital/HospitalType">
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >HospitalType</rdfs:label>
-  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/hospital/HospitalOwnershipType"/>
+  <rdfs:Class rdf:about="http://health.data.gov/def/hospital/HospitalType"/>
   <rdfs:Class rdf:about="http://health.data.gov/def/hospital/Hospital">
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >Hospital</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
   </rdfs:Class>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/ownership">
-    <rdfs:range rdf:resource="http://health.data.gov/def/hospital/HospitalOwnershipType"/>
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >ownership</rdfs:label>
-  </rdf:Property>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/type">
-    <rdfs:range rdf:resource="http://health.data.gov/def/hospital/HospitalType"/>
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >type</rdfs:label>
-  </rdf:Property>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/treats">
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >treats</rdfs:label>
-  </rdf:Property>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/mpvProvider">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >mpvProvider</rdfs:label>
-  </rdf:Property>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/cacProvider">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >cacProvider</rdfs:label>
-  </rdf:Property>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/emergencyServices">
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >emergencyServices</rdfs:label>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-  </rdf:Property>
-  <rdf:Property rdf:about="http://health.data.gov/def/hospital/site">
-    <rdfs:range rdf:resource="http://www.w3.org/ns/org#Site"/>
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >site</rdfs:label>
+  <owl:ObjectProperty rdf:about="http://health.data.gov/def/hospital/ownership"/>
+  <owl:ObjectProperty rdf:about="http://health.data.gov/def/hospital/type"/>
+  <owl:ObjectProperty rdf:about="http://health.data.gov/def/hospital/site">
     <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/org#hasPrimarySite"/>
+  </owl:ObjectProperty>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital/treats"/>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital/mpvProvider"/>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital/cacProvider"/>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital/emergencyServices">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
   </rdf:Property>
   <rdf:Property rdf:about="http://health.data.gov/def/hospital/accreditation">
-    <rdfs:domain rdf:resource="http://health.data.gov/def/hospital/Hospital"/>
-    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >accreditation</rdfs:label>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
   </rdf:Property>
   <rdf:Description rdf:about="http://health.data.gov/def/hospital-compare/provider">
