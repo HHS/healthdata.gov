@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:gd="http://reference.data.gov/def/govdata/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://reference.data.gov/def/govdata/">
+  <owl:Ontology rdf:about="">
+    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Government Data Vocabulary</dc:title>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Centers for Medicare and Medicaid Services</dc:contributor>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.0</owl:versionInfo>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Report">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Report</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Record">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Record</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Site">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Site</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Country">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Country</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/State">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >State</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Survey">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Survey</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/County">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >County</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/RecordSet">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >RecordSet</rdfs:label>
+  </rdfs:Class>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/country">
+    <rdfs:range rdf:resource="http://reference.data.gov/def/govdata/Country"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >country</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/countyCode">
+    <rdfs:range rdf:resource="http://reference.data.gov/def/govdata/County"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >countyCode</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/percentage">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >percentage</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/count">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >count</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/recordset">
+    <rdfs:range rdf:resource="http://reference.data.gov/def/govdata/RecordSet"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >recordset</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/denominator">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >denominator</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/record">
+    <rdfs:range rdf:resource="http://reference.data.gov/def/govdata/Record"/>
+    <rdfs:domain rdf:resource="http://reference.data.gov/def/govdata/RecordSet"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >record</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/stateCode">
+    <rdfs:range rdf:resource="http://reference.data.gov/def/govdata/State"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >stateCode</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/median">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >median</rdfs:label>
+  </rdf:Property>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

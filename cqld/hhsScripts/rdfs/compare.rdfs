@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:gd="http://reference.data.gov/def/govdata/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:comp="http://health.data.gov/def/compare/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:mcare="http://health.data.gov/def/medicare/"
+  xml:base="http://health.data.gov/def/compare/">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://reference.data.gov/def/govdata/"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.0</owl:versionInfo>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Centers for Medicare and Medicaid Services</dc:contributor>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >US Department of Health and Human Services</dc:contributor>
+    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Compare Vocabulary</dc:title>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/SurveyMetric">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://health.data.gov/def/compare/Metric"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SurveyMetric</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/SurveyMeasure">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://health.data.gov/def/compare/Measure"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SurveyMeasure</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/CACMeasure">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://health.data.gov/def/compare/Measure"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/Measure">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Measure</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/EfficiencyMeasure">
+    <rdfs:subClassOf rdf:resource="http://health.data.gov/def/compare/Measure"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/StructuralMeasure">
+    <rdfs:subClassOf rdf:resource="http://health.data.gov/def/compare/Measure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >StructuralMeasure</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/Metric">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Metric</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/OutcomeMeasure">
+    <rdfs:subClassOf rdf:resource="http://health.data.gov/def/compare/Measure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >OutcomeMeasure</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/Footnote">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Footnote</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/Condition">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Condition</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/ProcessMeasure">
+    <rdfs:subClassOf rdf:resource="http://health.data.gov/def/compare/Measure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ProcessMeasure</rdfs:label>
+  </rdfs:Class>
+  <rdf:Property rdf:about="http://health.data.gov/def/compare/measure">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >measure</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/compare/footnote">
+    <rdfs:range rdf:resource="http://health.data.gov/def/compare/Footnote"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/compare/performance">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >performance</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/compare/rate">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/compare/condition">
+    <rdfs:range rdf:resource="http://health.data.gov/def/compare/Condition"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >condition</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/compare/metric">
+    <rdfs:range rdf:resource="http://health.data.gov/def/compare/Metric"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >metric</rdfs:label>
+  </rdf:Property>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/AHRQMeasure">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://health.data.gov/def/compare/Measure"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/HAICondition">
+      <rdfs:subClassOf>
+        <rdfs:Class rdf:about="http://health.data.gov/def/compare/Condition"/>
+      </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/HACCondition">
+      <rdfs:subClassOf>
+        <rdfs:Class rdf:about="http://health.data.gov/def/compare/Condition"/>
+      </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/HAIMeasure">
+          <rdfs:subClassOf rdf:resource="http://health.data.gov/def/compare/Measure"/>
+          <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          >HAIMeasure</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://health.data.gov/def/compare/HACMeasure">
+          <rdfs:subClassOf rdf:resource="http://health.data.gov/def/compare/Measure"/>
+          <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+          >HACMeasure</rdfs:label>
+  </rdfs:Class>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->
