@@ -1,0 +1,8 @@
+
+for f in ` find . -name "*.rdf" ` 
+   do echo $f
+   sed "s/health\.data\.gov/healthdata.gov/g" $f >/tmp/foo.foo
+   cp /tmp/foo.foo $f
+   rm /tmp/foo.foo 
+done
+
