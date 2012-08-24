@@ -362,6 +362,28 @@ BEGIN {}
    comment = "Provider data regarding Healtcare-Associated Infections";
    label = "HAIP";
 }
+/^final_hac_national/ {
+   abbreviation = "hacn";
+   topic = "http://reference.data.gov/def/govdata/Country";
+   title = "Healthcare-Acquired Conditions, National data (HACN)";
+   description = "National data regarding Healtcare-Acquired Conditions";
+   vocab = "http://health.data.gov/def/hospital-compare";
+   uriSpace = "http://health.data.gov/id/country/US";
+   exampleResource = "http://health.data.gov/def/hospital-compare/Record";
+   comment = "National data regarding Healtcare-Acquired Conditions";
+   label = "HACN";
+}
+/^final_hac_provider/ {
+   abbreviation = "hacp";
+   topic = "http://health.data.gov/def/hospital/Hospital";
+   title = "Healthcare-Acquired Conditions, Provider data (HACP)";
+   description = "Provider data regarding Healthcare-Acquired Conditions";
+   vocab = "http://health.data.gov/def/hospital-compare";
+   uriSpace = "http://health.data.gov/id/hospital";
+   exampleResource = "http://health.data.gov/def/hospital-compare/Record";
+   comment = "Healthcare-Acquired Conditions, Provider data (HACP)";
+   label = "HACP";
+}
 END {
    if (get=="abbreviation") print abbreviation;
    if (get=="topic") print topic;
