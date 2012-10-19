@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+<modelVersion>4.0.0</modelVersion>
+<artifactId>loadGraphsSesame</artifactId>
+<groupId>gov.data.health.util</groupId>
+<version>1.0.0</version>
+<name>Load Graphs Sesame</name>
+<description>Connect to Sesame, traverse a directory tree, and put all RDF in the triple store.</description>
+
+<properties>
+  <maven.test.failure.ignore>true</maven.test.failure.ignore>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <lucene.version>3.1.0</lucene.version>
+</properties>
+
+
+<dependencies>
+<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-simple</artifactId>
+	<version>1.6.4</version>
+</dependency>
+<dependency>
+	<groupId>com.hp.hpl.jena</groupId>
+	<artifactId>jena</artifactId>
+	<version>2.6.4</version>
+</dependency>
+   <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-runtime</artifactId>
+	 <version>2.5.1</version>
+   </dependency>
+   <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-model</artifactId>
+	 <version>2.5.1</version>
+   </dependency>
+   <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-http-client</artifactId>
+      <version>2.5.1</version>
+   </dependency>
+   <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-sail-rdbms</artifactId>
+      <version>2.5.1</version>
+   </dependency>
+   <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-repository-sail</artifactId>
+      <version>2.5.1</version>
+   </dependency>
+   <dependency>
+      <groupId>org.openrdf.sesame</groupId>
+      <artifactId>sesame-sail-memory</artifactId>
+      <version>2.5.1</version>
+   </dependency>
+   <dependency>
+      <groupId>info.aduna.commons</groupId>
+      <artifactId>aduna-commons-io</artifactId>
+      <version>2.10.0</version>
+   </dependency>
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.6.2</version>
+   </dependency>
+   <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>0.9.29</version>
+   </dependency>
+    <dependency>
+      <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId>
+      <version>1.14</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <version>1.1</version>
+    </dependency>
+    
+<!--
+    <dependency>
+      <groupId>org.sindice.siren</groupId>
+      <artifactId>siren-core</artifactId>
+      <version>0.2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.sindice.siren</groupId>
+      <artifactId>siren-qparser</artifactId>
+      <version>0.2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.solr</groupId>
+      <artifactId>solr-core</artifactId>
+      <version>${lucene.version}</version>
+    </dependency>
+-->
+
+    <dependency>
+	<groupId>org.apache.solr</groupId>
+	<artifactId>solr-solrj</artifactId>
+	<version>3.5.0</version>
+    </dependency>
+
+</dependencies>
+
+<repositories>
+   <repository>
+      <id>openrdf</id>
+      <url>http://repo.aduna-software.org/maven2/releases/</url>
+      <releases>
+         <enabled>true</enabled>
+      </releases>
+      <snapshots>
+         <enabled>false</enabled>
+      </snapshots>
+   </repository>
+</repositories>
+
+<build>
+   <plugins>
+      <plugin>
+         <artifactId>maven-assembly-plugin</artifactId>
+         <configuration>
+            <archive>
+               <manifest>
+              <!--    <mainClass>gov.data.health.util.SampleSparqlQuery</mainClass> -->
+               <mainClass>gov.data.health.util.BulkLoader</mainClass> 
+               </manifest>
+            </archive>
+            <descriptorRefs>
+               <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+         </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.0.2</version>
+          <configuration>
+              <source>1.6</source>
+              <target>1.6</target>
+          </configuration>
+      </plugin>
+   </plugins>
+</build>
+
+</project>
