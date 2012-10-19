@@ -252,6 +252,21 @@
   <rdf:Property rdf:about="http://health.data.gov/def/hospital-compare/eligcasesRate">
       <rdfs:subPropertyOf rdf:resource="http://health.data.gov/def/compare/rate"/>
   </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital-compare/deviceDaysCount">
+      <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital-compare/confidenceRateUpper">
+      <rdfs:subPropertyOf rdf:resource="http://health.data.gov/def/compare/rate"/>
+  </rdf:Property>
+   <rdf:Property rdf:about="http://health.data.gov/def/hospital-compare/confidenceRateLower">
+      <rdfs:subPropertyOf rdf:resource="http://health.data.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital-compare/startQuarter">
+      <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://health.data.gov/def/hospital-compare/endQuarter">
+      <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Property>
 </rdf:RDF>
 
 <!-- Created with TopBraid -->
