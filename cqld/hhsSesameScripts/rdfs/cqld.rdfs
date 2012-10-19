@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:gd="http://reference.data.gov/def/govdata/"
+    xmlns:hosp="http://healthdata.gov/def/hospital/"
+    xmlns:hoco="http://healthdata.gov/def/hospital-compare/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:comp="http://healthdata.gov/def/compare/"
+    xmlns="http://healthdata.gov/def/cqld/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://healthdata.gov/def/cqld/">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://healthdata.gov/def/medicare/"/>
+    <owl:imports rdf:resource="http://healthdata.gov/def/hospital/"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Clinical Quality Linked Data (CQLD) - Composite Vocabulary - Version 0.1</owl:versionInfo>
+    <owl:imports rdf:resource="http://healthdata.gov/def/hospital-compare/"/>
+  </owl:Ontology>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://reference.data.gov/def/govdata/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://reference.data.gov/def/govdata/">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Government Data - Reference Vocabulary - Version 0.1</owl:versionInfo>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Report"/>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Record"/>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Site"/>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Country">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/State">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/Survey"/>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/County"/>
+  <rdfs:Class rdf:about="http://reference.data.gov/def/govdata/RecordSet">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdfs:Class>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/country">
+    <rdfs:range rdf:resource="http://reference.data.gov/def/govdata/Country"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/countyCode"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/percentage"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/count"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/recordset"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/denominator"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/record"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/stateCode"/>
+  <rdf:Property rdf:about="http://reference.data.gov/def/govdata/median"/>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

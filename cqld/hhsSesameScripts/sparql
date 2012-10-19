@@ -1,0 +1,36 @@
+#!/bin/bash
+source ./config.bash
+
+function urlEncode {
+  echo "$1" | sed "s/ /\+/g" | sed "s/\//%2F/g" | sed "s/</%3C/g" | sed "s/>/%3E/g" | sed "s/{/%7B/g" | sed "s/}/%7D/g" | sed "s/\?/%3F/g" | sed "s/:/%3A/g" | sed "s/(/%28/g" | sed "s/)/%29/g" | sed "s/!/%21/g" | sed "s/=/%3D/g" | sed "s/#/%23/g"
+}
+
+function uriQuery {
+  curl -L "${SPARQL_ENDPOINT}?query=$1" 2>/dev/null | grep "</binding>" | grep "<uri>" | sed "s/^.*<uri>\([^<]*\).*$/\1/g"
+}
+
+function numberQuery {
+  curl -L "${SPARQL_ENDPOINT}?query=$1" 2>/dev/null | grep "</binding>" | sed "s/.*integer\">\([0-9]*\)<\/literal.*$/\1/g"
+}
+
+function anyQuery {
+  stuff="`curl -L "${SPARQL_ENDPOINT}?query=$1" 2>/dev/null`" 
+  java Results "$stuff" $2
+}
+
+#qlist=$1
+#qlistEnc=`urlEncode "$qlist"`
+#rslt="`anyQuery $qlistEnc`"
+#for f in $rslt ; do
+#    echo "$f"
+#done
+
+mod=""
+if [ "$#" -eq 2 ] 
+then
+  mod=$2
+fi
+qlist=$1
+qlistEnc=`urlEncode "$qlist"`
+anyQuery $qlistEnc $mod
+

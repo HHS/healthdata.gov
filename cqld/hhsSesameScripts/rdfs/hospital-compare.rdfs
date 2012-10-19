@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:gd="http://reference.data.gov/def/govdata/"
+    xmlns:hoco="http://healthdata.gov/def/hospital-compare/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:comp="http://healthdata.gov/def/compare/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://healthdata.gov/def/hospital-compare/">
+  <owl:Ontology rdf:about="">
+    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Hospital Compare Vocabulary</dc:title>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Centers for Medicare and Medicaid Services</dc:contributor>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >US Department of Health and Human Services</dc:contributor>
+    <owl:imports rdf:resource="http://healthdata.gov/def/compare/"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1.0</owl:versionInfo>
+    <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/RecordSet">
+    <rdfs:subClassOf rdf:resource="http://reference.data.gov/def/govdata/RecordSet"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >RecordSet</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/HCAHPSSurveyMeasure">
+    <rdfs:subClassOf rdf:resource="http://healthdata.gov/def/compare/SurveyMeasure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >HCAHPSSurveyMeasure</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A Hospital Consumer Assessment of Healthcare Providers and Systems (HCAHPS) Survey Measure, which is a kind of Measure defined in the Compare vocabulary.</rdfs:comment>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/Survey">
+    <rdfs:subClassOf rdf:resource="http://reference.data.gov/def/govdata/Survey"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Survey</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/HCAHPSSurveyMetric">
+    <rdfs:subClassOf rdf:resource="http://healthdata.gov/def/compare/SurveyMetric"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >HCAHPSSurveyMetric</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A Hospital Consumer Assessment of Healthcare Providers and Systems (HCAHPS) Survey Metric, which is a kind of Metric defined in the Compare vocabulary.</rdfs:comment>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/Report">
+    <rdfs:subClassOf rdf:resource="http://reference.data.gov/def/govdata/Report"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Report</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/Record">
+    <rdfs:subClassOf rdf:resource="http://reference.data.gov/def/govdata/Record"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Record</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital-compare/NationalOutcomeMeasure">
+    <rdfs:subClassOf rdf:resource="http://healthdata.gov/def/compare/OutcomeMeasure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NationalOutcomeMeasure</rdfs:label>
+  </rdfs:Class>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/stateCount">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >stateCount</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/ratio">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ratio</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/provider">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >provider</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/readmissionPerformance">
+    <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/performance"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >readmissionPerformance</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/paymentRangeLow">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/median"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >paymentRangeLow</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/dischargesStartDate">
+    <rdfs:domain rdf:resource="http://healthdata.gov/def/compare/ProcessMeasure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dischargesStartDate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/record">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/record"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >record</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/dischargesStartQuarter">
+    <rdfs:domain rdf:resource="http://healthdata.gov/def/compare/ProcessMeasure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#gYearMonth"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dischargesStartQuarter</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/admissions">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >admissions</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/nationalCount">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >nationalCount</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/dischargesEndQuarter">
+    <rdfs:domain rdf:resource="http://healthdata.gov/def/compare/ProcessMeasure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#gYearMonth"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dischargesEndQuarter</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/rsmrLow">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:subPropertyOf>
+      <rdf:Description rdf:about="http://reference.data.gov/def/govdata/percentage">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+      </rdf:Description>
+    </rdfs:subPropertyOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rsmrLow</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/medianPayment">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/median"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >medianPayment</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/medianTime">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/median"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >medianTime</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/rsrr">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/percentage"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rsrr</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >risk standardized readmission rate</rdfs:comment>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/mortalityPerformance">
+    <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/performance"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >mortalityPerformance</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/rsrrLow">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/percentage"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rsrrLow</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/rsmrHigh">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/percentage"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rsmrHigh</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >risk standardized mortality rate high will point to the...</rdfs:comment>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/dischargesEndDate">
+    <rdfs:domain rdf:resource="http://healthdata.gov/def/compare/ProcessMeasure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >dischargesEndDate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/readmissionRate">
+    <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >readmissionRate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/reportingStartDate">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >reportingStartDate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/rsrrHigh">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/percentage"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rsrrHigh</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/rsmr">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/percentage"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rsmr</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >risk standardized mortality rate</rdfs:comment>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/mortalityRate">
+    <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >mortalityRate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/msdrg">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >msdrg</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/paymentRangeHigh">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/median"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >paymentRangeHigh</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/nationalMeasure">
+    <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/measure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >nationalMeasure</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/recordset">
+    <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/recordset"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >recordset</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/reportingEndDate">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >reportingEndDate</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/numerator">
+      <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/denominator">
+      <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/hacCount">
+     	<rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/dischargesCount">
+      <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/hacCountNational">
+     	<rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/dischargeCountNational">
+      <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/hospitalRate">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/NationalRate">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/stateRate">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/sirRate">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/eligcasesRate">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/deviceDaysCount">
+      <rdfs:subPropertyOf rdf:resource="http://reference.data.gov/def/govdata/count"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/confidenceRateUpper">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+   <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/confidenceRateLower">
+      <rdfs:subPropertyOf rdf:resource="http://healthdata.gov/def/compare/rate"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/startQuarter">
+      <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital-compare/endQuarter">
+      <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Property>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

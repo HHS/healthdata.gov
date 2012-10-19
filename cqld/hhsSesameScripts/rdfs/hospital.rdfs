@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://healthdata.gov/def/hospital/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://healthdata.gov/def/hospital/">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://www.w3.org/ns/org"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Hospital - CQLD Component Vocabulary - Version 0.1</owl:versionInfo>
+    <owl:imports rdf:resource="http://www.w3.org/2006/vcard/ns"/>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital/HospitalOwnershipType"/>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital/HospitalType"/>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/hospital/Hospital">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+  </rdfs:Class>
+  <owl:ObjectProperty rdf:about="http://healthdata.gov/def/hospital/ownership"/>
+  <owl:ObjectProperty rdf:about="http://healthdata.gov/def/hospital/type"/>
+  <owl:ObjectProperty rdf:about="http://healthdata.gov/def/hospital/site">
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/org#hasPrimarySite"/>
+  </owl:ObjectProperty>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital/treats"/>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital/mpvProvider"/>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital/cacProvider"/>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital/emergencyServices">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://healthdata.gov/def/hospital/accreditation">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </rdf:Property>
+  <rdf:Description rdf:about="http://healthdata.gov/def/hospital-compare/provider">
+    <rdfs:range rdf:resource="http://healthdata.gov/def/hospital/Hospital"/>
+  </rdf:Description>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

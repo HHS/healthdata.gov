@@ -1,0 +1,48 @@
+#!/bin/bash
+source ./config.bash
+
+if [ $# -lt "1" ]; then
+   echo "usage: prepDatasets <dir>"
+   echo "   This script locates any .rdf or .rdfs files found in <dir> or in a directory decendant from <dir>."
+   echo "   It creates the desired directory structure in the virtuoso file system, and copies those files there."
+   echo "   This script does NOT load RDF data into Virtuoso; use the loadGraphs script for that."
+   exit 1
+fi
+echo prepDatasets, ETA 1 min. >&2
+START=$(date +%s)
+
+pushd $1 >/dev/null
+toDir="${VIRTUOSO_HOME}/vsp/hhsFileSystem"
+for f in `find . -name "*.rdf"` ; do 
+   fileParts=`echo $f | sed "s/\.\/\(.*\)\/\([^/].*\.rdf\)/\1 \2/"`  
+   filePath=`echo $fileParts | awk '{print $1;}'`
+   fileName=`echo $fileParts | awk '{print $2;}'`
+   fileBase=`echo "$fileName" | awk -F. '{print $1;}'`
+   abbrev=`echo "$fileName" | awk -f ${VIRTUOSO_HOME}/hhsScripts/voidTable.awk get=abbreviation`
+   pubDate=`echo "$fileName" | sed "s/^.*_\([0-9]*\)_\([0-9]*\)_\([0-9]*\).rdf/\1-\2-\3/"`
+   where="$toDir/$abbrev/$pubDate"
+   mkdir -p $where
+   cp $f $where
+   echo "http://healthdata.gov/dataset/$abbrev/$pubDate"  > "$where/$fileName.graph"
+done
+for f in `find . -name "*.rdfs"` ; do 
+   f1=`echo "$f" | sed "s/.*\/\([^/]*rdf\)s$/\1/g"`
+   cp $f "$toDir/$f1"
+   echo  `grep "xml:base" $f | sed "s/.*xml:base=\"\(.*\/\)\".*$/\1/g"`  > "$toDir/$f1.graph"
+done
+for f in `find . -name "*.txt"` ; do 
+   fileParts=`echo $f | sed "s/\.\/\(.*\)\/\([^/].*\.txt\)/\1 \2/"`  
+   filePath=`echo $fileParts | awk '{print $1;}'`
+   fileName=`echo $fileParts | awk '{print $2;}'`
+   fileBase=`echo "$fileName" | awk -F. '{print $1;}'`
+   abbrev=`echo "$fileName" | awk -f ${VIRTUOSO_HOME}/hhsScripts/voidTable.awk get=abbreviation`
+   pubDate=`echo "$fileName" | sed "s/^.*_\([0-9]*\)_\([0-9]*\)_\([0-9]*\).txt/\1-\2-\3/"`
+   where="$toDir/$abbrev/$pubDate"
+   mkdir -p $where
+   cp $f $where
+done
+popd >/dev/null
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+echo "Completed in $DIFF sec." >&2

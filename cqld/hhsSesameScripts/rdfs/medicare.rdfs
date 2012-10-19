@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://healthdata.gov/def/medicare/"
+  xml:base="http://healthdata.gov/def/medicare/">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Medicare - CQLD Component Vocabulary - Version 0.1</owl:versionInfo>
+  </owl:Ontology>
+  <rdfs:Class rdf:about="http://healthdata.gov/def/medicare/MS-DRG"/>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

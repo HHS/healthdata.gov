@@ -1,0 +1,46 @@
+#!/bin/bash
+source ./config.bash
+
+echo clearGraphs, ETA 3 min. >&2
+START=$(date +%s)
+
+if ( test $# -gt "0" ) && [ "$1" != "-v" ]; then
+   echo "usage:  ./clearGraphs [-v]"
+   echo "          -v means use Virtuoso to obtain the list to clear"
+   echo "  purpose: remove graphs loaded by HHS from Virtuoso"
+   echo "           by default it will not use Virtuoso to obtain the list of graphs"
+   echo "           but instead obtain the info from the file system (faster)."
+   exit 1
+fi
+
+#
+#  If there is no record laying around of graphs loaded
+#  OR if the command line parameter -v exists (Virtuoso)
+#  then use Virtuoso to find graph names  (takes about a minute to execute)
+#
+
+param=
+if [ "$1" == "-v" ]; then
+   param="-v"
+fi
+
+#
+# Loop through all graphs and use SPARQL to clear them
+#
+for f in `./listGraphs $param` ; do 
+  "${ISQL_CMD}" ${ISQL_PORT} ${ISQL_USER} ${ISQL_PASSWORD} <<ENDSQL >/dev/null 2>/dev/null
+sparql clear graph <$f> ;
+quit;
+ENDSQL
+done
+
+#
+# Remove the Virtuoso mounted file system for HHS data
+#
+rm -fR ${VIRTUOSO_HOME}/vsp/hhsFileSystem/* &>/dev/null
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+MIN=$(( $DIFF / 60 ))
+SEC=$(( $DIFF - ($MIN * 60) ))
+echo "clearGraphs Completed in $MIN min $SEC sec." >&2
