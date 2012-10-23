@@ -1,0 +1,175 @@
+#!/bin/bash
+source ./config.bash
+
+function uriQuery {
+  curl -L "${SPARQL_ENDPOINT}?query=$1" 2>/dev/null | grep "</binding>" | grep "<uri>" | sed "s/^.*<uri>\([^<]*\).*$/\1/g"
+}
+
+function urlEncode {
+  echo "$1" | sed "s/ /\+/g" | sed "s/\//%2F/g" | sed "s/</%3C/g" | sed "s/>/%3E/g" | sed "s/{/%7B/g" | sed "s/}/%7D/g" | sed "s/\?/%3F/g" | sed "s/:/%3A/g"
+}
+
+function numberQuery {
+  curl -L "${SPARQL_ENDPOINT}?query=$1" 2>/dev/null | grep "</binding>" | sed "s/.*integer\">\([0-9]*\)<\/literal.*$/\1/g"
+}
+
+function getExampleUris {
+  graph="$1"
+  qlist="SELECT distinct ?uri FROM <$graph> WHERE { ?s a ?uri. } "
+  qlistEnc=`urlEncode "$qlist"`
+  rslt="`uriQuery $qlistEnc`"
+
+  for f in $rslt ; do
+    q1="SELECT ?s FROM <$graph> WHERE { ?s a <$f>. } limit 1"
+    q1Enc=`urlEncode "$q1"`
+    echo `uriQuery "$q1Enc"`
+  done
+}
+
+function getExampleUrisFromTypeList {
+  for f in $2 ; do
+    q1=`urlEncode "SELECT ?s FROM <$1> WHERE { ?s a <$f>. } limit 1"`
+    a1=`uriQuery "$q1"`
+    echo `echo $a1 | sed "s/localhost/healthdata.gov/g"`
+  done
+}
+
+function voidMaker {
+   name=$1
+   dateStr=$2
+   voidTable="${SCRIPT_DIR}/voidTable.awk"
+   dateStrFlipped=`echo $2 | awk -F- '{ print $3 "-" $2 "-" $1; }'`
+   host="<http://healthdata.gov/"
+   hostSimple="http://healthdata.gov/"
+   nameBase=`echo $name | awk -F. '{ print $1; }'`
+   abbrev=`echo $name | awk -f $voidTable get=abbreviation`
+   topic=`echo $name | awk -f $voidTable get=topic`
+   title=`echo $name | awk -f $voidTable get=title`
+   description=`echo $name | awk -f $voidTable get=description`
+   vocab1=`echo $name | awk -f $voidTable get=vocab`
+   vocab=`echo $vocab1 | sed "s/\/$//g"`
+   uriSpace=`echo $name | awk -f $voidTable get=uriSpace`
+   exampleResource=`echo $name | awk -f $voidTable get=exampleResource`
+   comment=`echo $name | awk -f $voidTable get=comment`
+   label=`echo $name | awk -f $voidTable get=label`
+   dsName="${host}dataset/${abbrev}/${dateStr}"
+   dsNameSimple="${hostSimple}dataset/${abbrev}/${dateStr}"
+
+   echo "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ."
+   echo "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> ."
+   echo "@prefix xsd: <http://www.w3.org/2001/XMLSchema#> ."
+   echo "@prefix foaf: <http://xmlns.com/foaf/0.1/> ."
+   echo "@prefix dcterms: <http://purl.org/dc/terms/> ."
+   echo "@prefix void: <http://rdfs.org/ns/void#> ."
+   echo "@prefix : <#> ."
+   echo ""
+   echo "${dsName}> rdf:type void:Dataset ;"
+   echo "  foaf:homepage ${host}dataset/${abbrev}> ;"
+   echo "  foaf:primaryTopic <${topic}> ;"
+   echo "  dcterms:title \"${title} ${dateStr}\" ;"
+   echo "  dcterms:description \"${description}\" ;"
+   echo "  dcterms:issued \"${dateStr}\"^^xsd:date ;"
+   echo "  dcterms:source ${dsName}/${nameBase}.txt> ;"
+   echo "  void:sparqlEndpoint ${host}sparql> ;"
+   echo "  void:dataDump ${dsName}/${nameBase}.rdf> ;"
+   echo "  void:vocabulary <${vocab}.rdfs> ;"
+#   exampleR="`getExampleUris ${dsNameSimple}`"
+   exampleR=`getExampleUrisFromTypeList "${dsNameSimple}" "${exampleResource}"`
+   for exR in $exampleR ; do
+      echo "  void:exampleResource <${exR}> ;"
+   done
+   echo "  rdfs:comment \"${comment}\" ;"
+   echo "  rdfs:label \"${label}\" ;"
+   graph="${dsName}>"
+   q=`urlEncode "SELECT (COUNT(*) AS %3Fno) FROM $graph { %3Fs %3Fp %3Fo }"`
+   echo "  void:triples \"`numberQuery $q`\"^^xsd:integer ;"
+   q=`urlEncode "SELECT COUNT(distinct %3Fs) AS %3Fno FROM $graph { %3Fs a %3Fo  }"`
+   echo "  void:entities \"`numberQuery $q`\"^^xsd:integer ;"
+   q=`urlEncode "SELECT COUNT(distinct %3Fo) AS %3Fno FROM $graph { %3Fs rdf:type %3Fo }"`
+   echo "  void:classes \"`numberQuery $q`\"^^xsd:integer ;"
+   q=`urlEncode "SELECT COUNT(distinct %3Fp) FROM $graph { %3Fs %3Fp %3Fo }"`
+   echo "  void:properties \"`numberQuery $q`\"^^xsd:integer ;"
+   q=`urlEncode "SELECT (COUNT(DISTINCT %3Fs ) AS %3Fno) FROM $graph { %3Fs %3Fp %3Fo }"`
+   echo "  void:distinctSubjects \"`numberQuery $q`\"^^xsd:integer ;"
+   q=`urlEncode "SELECT (COUNT(DISTINCT %3Fo ) AS %3Fno) FROM $graph { %3Fs %3Fp %3Fo.  filter(!isLiteral(%3Fo)) }"`
+   echo "  void:distinctObjects \"`numberQuery $q`\"^^xsd:integer ."
+   echo ""
+   echo "${host}dataset> foaf:homepage ${host}dataset/${abbrev}> ."
+   echo "${host}dataset/${abbrev}> void:dataset ${dsName}> ;"
+   echo "  foaf:primaryTopic <${topic}> ;"
+   echo "  dcterms:title \"${title}\" ;"
+   echo "  dcterms:description \"${description}\" ;"
+   echo "  void:vocabulary <${vocab}.rdfs> ;"
+   echo "  rdfs:label \"${label}\" ;"
+   echo "  rdf:type foaf:Document ."
+   echo ""
+}
+
+function voidOntoMaker {
+   name="$1"
+   host="http://healthdata.gov"
+
+   echo "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ."
+   echo "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> ."
+   echo "@prefix xsd: <http://www.w3.org/2001/XMLSchema#> ."
+   echo "@prefix foaf: <http://xmlns.com/foaf/0.1/> ."
+   echo "@prefix dcterms: <http://purl.org/dc/terms/> ."
+   echo "@prefix void: <http://rdfs.org/ns/void#> ."
+   echo "@prefix : <#> ."
+   echo ""
+   echo "<${host}/def/${name}/> rdfs:seeAlso <${host}/def/${name}.rdfs>."
+   echo ""
+}
+
+echo makeMetadata, ETA 35 min. >&2
+START=$(date +%s)
+
+fromDir="${STAGING_DIR}"
+
+if [ "$1" != "-m" ] ; then
+
+echo "   Generate VoID metadata" >&2
+pushd $fromDir >/dev/null
+for f in `find . -name "*.rdf"` ; do
+   fileParts=`echo $f | sed "s/\.\/\(.*\)\/\([^/].*\.rdf\)/\1 \2/"`
+   filePath=`echo $fileParts | awk '{print $1;}'`
+   fileName=`echo $fileParts | awk '{print $2;}'`
+   fileBase=`echo "$fileName" | awk -F. '{print $1;}'`
+
+   abbrev=`echo "$fileName" | awk -f ${SCRIPT_DIR}/voidTable.awk get=abbreviation`
+   pubDate=`echo "$fileName" | sed "s/^.*_\([0-9]*\)_\([0-9]*\)_\([0-9]*\).rdf/\1-\2-\3/"`
+   where="$abbrev/$pubDate"
+#echo "debug: where = $where"
+   if ( test "$fileName" == "" ) ; then
+      {
+#echo "debug: f = $f"
+      name1=`echo "${f}" | sed "s/^[^/]*[/]\([^/.]*\).*$/\1/g"`
+      echo "      Ontology assumed for: ${name1}.rdf"
+      voidOntoMaker "${name1}" > "${name1}-void-dc.ttl"
+      echo "http://healthdata.gov/def/${name1}/" > "${name1}-void-dc.ttl.graph"
+      }
+   else 
+      {
+#echo "debug: fileBase = $fileBase"
+      voidMaker $fileName $pubDate > "$where/$fileBase-void-dc.ttl"
+      echo "http://healthdata.gov/dataset/$abbrev/$pubDate"  > "$where/$fileBase-void-dc.ttl.graph"
+      }
+   fi
+done
+
+echo "
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://healthdata.gov/dataset> rdf:type foaf:Document .
+" > global.ttl
+echo "http://healthdata.gov" > global.ttl.graph
+popd >/dev/null
+
+fi
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+MIN=$(( $DIFF / 60 ))
+SEC=$(( $DIFF - ($MIN * 60) ))
+echo "makeMetadata Completed in $MIN min $SEC sec." >&2

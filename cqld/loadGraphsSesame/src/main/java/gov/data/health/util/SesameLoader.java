@@ -19,7 +19,7 @@ public class SesameLoader extends BulkLoader {
 	
 	@Override
 	public void init() throws Exception {
-		String sesameServer = "http://localhost:8080/openrdf-sesame";
+		String sesameServer = "http://localhost/openrdf-sesame";
 		Repository myRepository = new HTTPRepository(sesameServer, repoId);
 		f = myRepository.getValueFactory();
 		myRepository.initialize();
@@ -32,11 +32,15 @@ public class SesameLoader extends BulkLoader {
 	@Override
 	public void loadOne( File file, String graphName ) throws Exception {
 		String oneFullName = file.getAbsolutePath();
+		con.add(file, "file://"+oneFullName, 
+				((file.getName().endsWith(".rdf")) ? (RDFFormat.RDFXML) : (RDFFormat.TURTLE)), 
+				f.createURI(graphName));
+/*
 		String str = oneFullName.substring(oneFullName.indexOf("hhsFileSystem"));
-		URL url = new URL("http://localhost:8080/" + str);
+		URL url = new URL("http://localhost/" + str);
 		
 		con.add(url, url.toString(), 
 				((file.getName().endsWith(".rdf")) ? (RDFFormat.RDFXML) : (RDFFormat.TURTLE)), 
-				f.createURI(graphName));
+*/
 	}
 }

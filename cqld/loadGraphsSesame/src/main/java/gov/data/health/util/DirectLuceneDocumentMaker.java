@@ -21,7 +21,7 @@ import org.apache.solr.common.SolrInputDocument;
  */
 public class DirectLuceneDocumentMaker extends LuceneDocumentMaker {
 	Collection<SolrInputDocument> docs = null;
-	String serverUrl = "http://localhost:8080/siren";
+	String serverUrl = "http://localhost/siren";
    private int hops = 1;
 	
 	public DirectLuceneDocumentMaker( int hops ) {

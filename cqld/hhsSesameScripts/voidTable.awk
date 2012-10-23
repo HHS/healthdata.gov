@@ -87,6 +87,17 @@ BEGIN {}
    comment = "General hospital characteristic information as measured by HOPQDRP.";
    label = "HOPHC";
 }
+/^outpatient_finalfile_hsp_characteristics/ {
+   abbreviation = "hophc";
+   topic = "http://healthdata.gov/def/hospital/Hospital";
+   title = "Hospital Outpatient Quality Data Reporting Program - Hospital Characteristics (HOPHC)";
+   description = "General hospital characteristic information as measured by HOPQDRP.";
+   vocab = "http://healthdata.gov/def/hospital";
+   uriSpace = "http://healthdata.gov/id/hospital";
+   exampleResource = "http://www.w3.org/2006/vcard/ns#VCard";
+   comment = "General hospital characteristic information as measured by HOPQDRP.";
+   label = "HOPHC";
+}
 /^final_hsp_characteristics/ {
    abbreviation = "hosp";
    topic = "http://healthdata.gov/def/hospital/Hospital";
@@ -175,6 +186,17 @@ BEGIN {}
    comment = "Survey information about hospital HOPQDRP performance measures and metrics.";
    label = "HOPHP";
 }
+/^outpatient_finalfile_hosp_perf/ {
+   abbreviation = "hophp";
+   topic = "http://healthdata.gov/def/hospital/Hospital";
+   title = "Hospital Outpatient Quality Data Reporting Program - Hospital Performance (HOPHP)";
+   description = "Survey information about hospital HOPQDRP performance measures and metrics.";
+   vocab = "http://healthdata.gov/def/compare";
+   uriSpace = "http://healthdata.gov/id/hospital";
+   exampleResource = "http://healthdata.gov/def/hospital-compare/Record";
+   comment = "Survey information about hospital HOPQDRP performance measures and metrics.";
+   label = "HOPHP";
+}
 /^[Hh]opqdrp_finalfile_natl_perf/ {
    abbreviation = "hopnp";
    topic = "http://reference.data.gov/def/govdata/Country";
@@ -186,7 +208,29 @@ BEGIN {}
    comment = "HOPQDRP national outcome performance measures and metrics.";
    label = "HOPNP";
 }
+/^outpatient_clinical_process_measures_national/ {
+   abbreviation = "hopnp";
+   topic = "http://reference.data.gov/def/govdata/Country";
+   title = "Hospital Outpatient Quality Data Reporting Program - National Outcomes (HOPNP)";
+   description = "HOPQDRP national outcome performance measures and metrics.";
+   vocab = "http://healthdata.gov/def/compare";
+   uriSpace = "http://healthdata.gov/id/measure";
+   exampleResource = "http://healthdata.gov/def/hospital-compare/Record";
+   comment = "HOPQDRP national outcome performance measures and metrics.";
+   label = "HOPNP";
+}
 /^[Hh]opqdrp_finalfile_state_perf/ {
+   abbreviation = "hopsp";
+   topic = "http://reference.data.gov/def/govdata/State";
+   title = "Hospital Outpatient Quality Data Reporting Program - State Performance";
+   description = "Survey information about state outpatient performance measures and metrics.";
+   vocab = "http://healthdata.gov/def/compare";
+   uriSpace = "http://healthdata.gov/id/measure";
+   exampleResource = "http://healthdata.gov/def/hospital-compare/Record";
+   comment = "Survey information about state outpatient performance measures and metrics.";
+   label = "HOPSP";
+}
+/^outpatient_clinical_process_measures_state/ {
    abbreviation = "hopsp";
    topic = "http://reference.data.gov/def/govdata/State";
    title = "Hospital Outpatient Quality Data Reporting Program - State Performance";

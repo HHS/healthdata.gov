@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
  */
 public class MulgaraLoader extends BulkLoader {
 	final String dq = "\"";
-	final String websvc = "http://localhost:8080/mulgara/webui/ExecuteQuery.html";
+	final String websvc = "http://localhost/mulgara/webui/ExecuteQuery.html";
 
 	@Override
 	public void init() throws Exception {		

@@ -1,0 +1,52 @@
+#!/bin/bash
+source ./config.bash
+
+if ( test $# -gt "0" ) && [ "$1" != "-v" ]; then
+   echo "usage:  ./listGraphs [-v]"
+   echo "          -v means use Virtuoso"
+   echo "  purpose: List graphs loaded by HHS"
+   echo "           by default it will not use Virtuoso"
+   echo "           but instead obtain the info from the file system"
+   exit 1
+fi
+#
+# find the contents of all .graph files and remove duplicates
+#
+hhsFS="${STAGING_DIR}"
+
+#
+#  If there is no record laying around of graphs loaded
+#  OR if the command line parameter -v exists (Virtuoso)
+#  then use Virtuoso to find graph names  (takes about a minute to execute)
+#
+if (! test -d "$hhsFS" ) || [ "$1" == "-v" ]; then
+
+echo "listGraphs: using Virtuoso to find graph names, ETA 1 min." >&2
+
+  allGraphs=`curl -L ${SPARQL_ENDPOINT}?query=select+distinct+%3fg+where+%7b+graph+%3fg+%7b+%3fa+%3fb+%3fc.+%7d+%7d 2>/dev/null |  grep "<uri>" | sed "s/^.*<uri>\(.*\)<\/uri>.*$/\1/g" | grep "http" | grep -v "DAV" `
+#
+#  find all graphs that use healthdata.gov
+#
+  healthGraphs=`echo "$allGraphs" | grep "healthdata\.gov"`
+#
+#  find all graphs that use reference.data.gov
+#
+  referenceGraphs=`echo "$allGraphs" | grep "reference\.data\.gov"`
+#
+#  find all graphs that use localhost
+#
+  localGraphs=`echo "$allGraphs" | grep "localhost"`
+
+  list=`echo "$healthGraphs" ; echo "$referenceGraphs" ; echo "$localGraphs"` 
+  for f in "$list" ;do 
+    echo "$f"
+  done
+else
+#
+# if the HHS mounted file system directory exists, use .graph files to find loaded graphs
+#
+  cd "${hhsFS}"
+  for f in `find . -name "*.graph"` ; do cat $f ; done | sort -u
+
+fi
+

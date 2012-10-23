@@ -59,11 +59,15 @@ public abstract class BulkLoader  {
 			final Collection<File> all = new ArrayList<File>();
 			traverse(new File(root), all);
 			
+                        int count = 0;
 			if (all!=null) for (File one : all) {
-				System.out.println( "Loading " + one.getName() );
+                                count++;
+				System.out.println( "Loading #"+count+": " + one.getName() );
 				String oneFullName = one.getAbsolutePath();
-//				String oneGraph = readFileToString(oneFullName + ".graph").trim();
-				String oneGraph = "http://health.data.gov/test";
+				String oneGraph = System.getProperty( "oneGraph" );
+                                if (oneGraph==null) {
+				   oneGraph = readFileToString(oneFullName + ".graph").trim();
+                                } 
 				
 				loader.loadOne( one, oneGraph );
 			}

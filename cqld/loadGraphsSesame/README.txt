@@ -7,8 +7,10 @@ mvn clean install assembly:single
 # 
 # To load into sesame a single RDF file (or all RDF files rooted at the specified directory)
 #
+# The variable "oneGraphs" overrides graph names and dumps all triples into the single graph name specified.
+#
 
-java -jar target/loadGraphsSesame-1.0.0-jar-with-dependencies.jar CQLD /Users/dougHHS/work/apache-tomcat-6.0.33/webapps/ROOT/hhsFileSystem/cacn/2011-06-07/Final_CAC_National_File_2011_06_07.rdf
+java -DoneGraph=http://healthdata.gov/cqldfast -jar target/loadGraphsSesame-1.0.0-jar-with-dependencies.jar CQLD /Users/dougHHS/work/apache-tomcat-6.0.33/webapps/ROOT/hhsFileSystem/cacn/2011-06-07/Final_CAC_National_File_2011_06_07.rdf
 
 
 #

@@ -24,7 +24,7 @@ import java.io.IOException;
  * @author dougHHS
  */
 public class SolrLoader extends BulkLoader {
-	String url = "http://localhost:8080/siren";
+	String url = "http://localhost/siren";
 	LuceneDocumentMaker docMaker = null;
 	
 	public SolrLoader( LuceneDocumentMaker docMaker ) {

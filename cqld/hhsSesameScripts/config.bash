@@ -2,55 +2,20 @@
 #
 # All HHS scripts use this file 
 #
-##############################
-# ISQL_PORT is the port used for this instance of Virtuoso for the isql command
-##############################
-# ISQL_PORT="1111"
-
-ISQL_PORT="1111"
 
 ##############################
-# ISQL_USER is the username to administer this instance of Virtuoso
+# SCRIPT_DIR 
 ##############################
-# ISQL_USER="dba"
+# SCRIPT_DIR="/Applications/OpenLinkVirtuoso/Virtuoso6.2/hhsSesameScripts"
 
-ISQL_USER="dba"
-
-##############################
-# ISQL_PASSWORD is the password for $ISQL_USER to administer this instance of Virtuoso
-##############################
-# ISQL_PASSWORD="dba"
-
-ISQL_PASSWORD="dba"
+SCRIPT_DIR="/home/ubuntu/cqld/hhsSesameScripts"
 
 ##############################
-# VIRTUOSO_HOME 
+#  STAGING_DIR
 ##############################
-# VIRTUOSO_HOME="/usr2/local/virtuoso-6.1.3"
+# STAGING_DIR="/Applications/OpenLinkVirtuoso/Virtuoso6.2/vsp/hhsFileSystem"
 
-VIRTUOSO_HOME="/Applications/OpenLinkVirtuoso/Virtuoso6.2"
-
-##############################
-# ISQL_CMD is the command used for this instance of Virtuoso 
-##############################
-# ISQL_CMD="/u02/virtuoso/bin/isql"
-
-ISQL_CMD="${VIRTUOSO_HOME}/bin/isql"
-
-##############################
-# HHS_SCRIPT is the directory that contains all of the HHS scripts
-##############################
-# HHS_SCRIPT="${VIRTUOSO_HOME}/hhsScript"
-
-HHS_SCRIPT="${VIRTUOSO_HOME}/hhsScript"
-
-##############################
-# HHS_BACKUP is the location to store/retrieve backup zip files
-##############################
-# HHS_BACKUP="${VIRTUOSO_HOME}/hhsBackupStorage"
-
-HHS_BACKUP="${VIRTUOSO_HOME}/hhsBackupStorage"
-
+STAGING_DIR="/tmp/hhsFileSystem"
 
 ##############################
 # SPARQL_ENDPOINT is the URL of sparql endpoint, used by curl and such...
