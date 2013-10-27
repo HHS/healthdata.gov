@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?> 
+    <!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite3.2.dtd">
+
+<urlrewrite decode-using="null" use-query-string="true">
+
+    <!--
+    	Everything that's part of the resource set is rewritten to
+    	be under "static" so that it can be dealt with with a single
+    	trivial servlet mapping. All the other URLs are assumed to
+    	belong to a set of Elda URI templates.
+    -->
+    
+    <rule>
+        <from>^/(lda-assets|specs|API)/(.*)$</from>
+        <to last="true" type="forward">/$1/$2</to>
+    </rule>
+
+    <rule> <note> Linked Data best practice dictates that "id"s redirect to "doc"s </note>
+        <from>^/id/(.*)$</from>
+        <set type="status">303</set> 
+        <set type="response-header" name="Location">/doc/$1</set> 
+        <to last="true">null</to>
+    </rule>
+
+    <rule> <note> Doug's API to redirect URIs that end in "/*" to "/instances" </note>
+        <from>^/def/compare/([^/]*)/[*]$</from>
+        <to type="redirect" last="true">%{context-path}/$1/instances</to>
+    </rule> 
+
+    <rule> <note> Doug's API to lookup the user's current address to find local hospitals </note>
+        <from>^/def/hospital/Hospital/[*]$</from>
+        <to type="forward" last="true">/getlocation.html</to>
+    </rule> 
+
+
+    <rule> <note> Add a trailing slash to ontology URIs </note>
+        <from>^/def/([^/]*)[.]rdfs$</from>
+        <to type="forward" last="true">/hhsFileSystem/$1.rdf</to>
+    </rule> 
+
+    <rule> <note> Add a trailing slash to ontology URIs </note>
+        <from>^/def/([^/]*)$</from>
+        <to type="redirect" last="true">%{context-path}/def/$1/</to>
+    </rule>
+
+    <rule> <note> Remove the trailing slash on non-ontology URIs in the def subcontext </note>
+        <from>^/def/([^/]*)/(.*)/$</from>
+        <to type="redirect" last="true">%{context-path}/def/$1/$2</to>
+    </rule>
+    
+    <rule> <note> Remove a trailing slash other URIs </note>
+        <from>^/dataset(.*)/$</from>
+        <to type="redirect" last="true">%{context-path}/dataset$1</to>
+    </rule>
+    
+    <rule> <note> Remove the API found in some URLs created by elda itself</note>
+        <from>^/API/(.*)$</from>
+        <to type="redirect" last="true">%{context-path}/$1</to>
+    </rule>
+    
+    <rule> <note> forward to the datasource rdf files </note>
+        <from>^/dataset/(.*[0-9][0-9][0-9][0-9]_[0-9][0-9]_[0-9][0-9][.]rdf)$</from>
+        <to type="forward" last="true">/hhsFileSystem/$1</to>
+    </rule>
+    
+    <rule> <note> forward to the datasource txt files </note>
+        <from>^/dataset/(.*[0-9][0-9][0-9][0-9]_[0-9][0-9]_[0-9][0-9][.]txt)$</from>
+        <to type="forward" last="true">/hhsFileSystem/$1</to>
+    </rule>
+
+    <rule>
+        <from>^/(.*)[.]html[?](.*)$</from>
+        <to type="forward">/$1?$2</to>
+    </rule>
+    
+    
+    <rule>
+        <from>^/$</from>
+        <to last="true" type="forward">index.html</to>
+    </rule>
+    
+    <rule>
+        <from>^/(.*)$</from>
+        <to last="true" type="forward">/API/$1</to>
+    </rule>
+
+</urlrewrite>

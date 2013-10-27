@@ -1,0 +1,711 @@
+@base         <http://healthdata.gov> .
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix ex:   <http://www.epimorphics.com/examples/eg1#> .
+@prefix api:  <http://purl.org/linked-data/api/vocab#> .
+@prefix extras: <http://www.epimorphics.com/vocabularies/lda#> .
+@prefix elda:  <http://www.epimorphics.com/vocabularies/lda#> .
+
+@prefix dct:				<http://purl.org/dc/terms/> .
+
+@prefix gd:    <http://reference.data.gov/def/govdata/> .
+@prefix hosp:  <http://healthdata.gov/def/hospital/> .
+@prefix hoco:  <http://healthdata.gov/def/hospital-compare/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix comp:  <http://healthdata.gov/def/compare/> .
+@prefix cqld:  <http://healthdata.gov/def/cqld/> .
+@prefix ns:    <http://www.w3.org/ns/org#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix hint:  <http://www.bigdata.com/queryHints#> .
+  
+    
+<health-api> a api:API 
+  ; rdfs:label "Health and Human Services, CMS data API"@en 
+  ; api:endpoint <hospitalsNearLatLon> 
+  ; api:endpoint <conditions> 
+  ; api:endpoint <measures> 
+  ; api:endpoint <metrics> 
+  
+  ; api:endpoint <def-ontology> 
+  ; api:endpoint <def-ontology-thing>
+  
+  ; api:endpoint <recordEndpoint>
+  ; api:endpoint <recordsetEndpoint>
+  ; api:endpoint <datasetEndpoint>
+  ; api:endpoint <datasetTypeEndpoint>
+  ; api:endpoint <datasourceEndpoint>
+  
+  ; api:endpoint <hospitals> 
+  ; api:endpoint <hospital-by-id>
+  ; api:endpoint <site-by-id>
+  ; api:endpoint <vcard-by-id>
+  ; api:endpoint <hospitaltype-by-id>
+  ; api:endpoint <ownershiptype-by-id>
+  ; api:endpoint <condition-by-id>
+  ; api:endpoint <measure-by-id>
+  ; api:endpoint <metric-by-id>
+  
+  ; api:maxPageSize "50" 
+  ; api:defaultPageSize "10"
+  ; api:sparqlEndpoint <http://127.0.0.1/bigdata/sparql> 
+  ; extras:enableETags true
+	
+	# the default html formatter invokes the XSLT stylesheet. It will normally
+	# be pulled in by a browsers default accept-header, but it can be specified
+	# explicitly using the .html suffix on the URI path.
+	#
+	; api:formatter 
+		[a api:XsltFormatter
+		; api:name "html"
+		; api:stylesheet "lda-assets/xslt/result-osm.xsl"  
+		; api:mimeType "text/html; charset=utf-8"
+		] 
+		
+	#
+	# as an alternative, a non-default html formatter with the name
+	# 'plainhtml' produces a very simple html rendering of the view.
+	#
+	# the turtle, rdf/xml, and json renderers are builtin and don't
+	# need specification in this config file.
+	#
+	; api:formatter
+		[a api:HtmlFormatter
+		; extras:className "com.epimorphics.lda.demo.Demo_HTML_RendererFactory"
+		; api:name "plainhtml"
+		; api:mimeType 'text/htmlx'
+		]
+		
+	#
+	#
+	; api:formatter
+             [a api:XsltFormatter
+             ; api:stylesheet "lda-assets/xslt/csv.xsl"  
+             ; api:name "csv"
+             ; api:mimeType "text/csv;charset=UTF-8"
+#                           elda special 
+             ; extras:metadataOptions "bindings,versions,execution,formats"
+             ]
+  .
+   
+    
+<hospital-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/hospital/490101"
+    ; api:uriTemplate "/doc/hospital/{id}"
+    ; api:itemTemplate "http://healthdata.gov/id/hospital/{id}"
+    ; api:defaultViewer <hospitalMediumViewer> 
+    ; api:viewer <hospitalMediumViewer>, <noneViewer>, <hospitalAllViewer>, <hospitalGeoViewer>
+    .
+    
+
+<site-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/hospital/490101/site/1"
+    ; api:uriTemplate "/doc/hospital/{id}/site/{siteid}"
+    ; api:itemTemplate "http://healthdata.gov/id/hospital/{id}/site/{siteid}"
+    ; api:defaultViewer <siteMediumViewer> 
+    ; api:viewer <siteMediumViewer>, <noneViewer>
+    .
+
+<vcard-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/hospital/490101/site/1/vcard/1"
+    ; api:uriTemplate "/doc/hospital/{id}/site/{siteid}/vcard/{vcardid}"
+    ; api:itemTemplate "http://healthdata.gov/id/hospital/{id}/site/{siteid}/vcard/{vcardid}"
+    ; api:defaultViewer <vcardMediumViewer> 
+    ; api:viewer <vcardMediumViewer>, <noneViewer>
+    .
+     
+<ownershiptype-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/hospital/ownership/type/7"
+    ; api:uriTemplate "/doc/hospital/ownership/type/{id}"
+    ; api:itemTemplate "http://healthdata.gov/id/hospital/ownership/type/{id}"
+    ; api:defaultViewer <ownershiptype-default-viewer>
+    ; api:viewer <ownershiptype-default-viewer>, <noneViewer>
+    .
+    
+<ownershiptype-default-viewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdf:type
+        , rdfs:label
+    .
+
+<hospitaltype-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/hospital/type/1"
+    ; api:uriTemplate "/doc/hospital/type/{id}"
+    ; api:itemTemplate "http://healthdata.gov/id/hospital/type/{id}"
+    ; api:defaultViewer <hospitaltype-default-viewer>
+    ; api:viewer <hospitaltype-default-viewer>, <noneViewer>
+    .
+    
+<hospitaltype-default-viewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdf:type
+        , rdfs:label
+        , dcterms:replaces
+    .
+
+<condition-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/condition/1"
+    ; api:uriTemplate "/doc/condition/{id}"
+    ; api:itemTemplate "http://healthdata.gov/id/condition/{id}"
+    ; api:defaultViewer <condition-default-viewer>
+    ; api:viewer <condition-default-viewer>, <noneViewer>
+    .
+
+<condition-default-viewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdf:type
+        , dcterms:replaces
+        , rdfs:label
+        , rdfs:comment
+    .
+
+<measure-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/measure/1"
+    ; api:uriTemplate "/doc/measure/{id}"
+    ; api:itemTemplate "http://healthdata.gov/id/measure/{id}"
+    ; api:defaultViewer <measure-default-viewer>
+    ; api:viewer <measure-default-viewer>, <noneViewer>
+    .
+    
+<measure-default-viewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdf:type
+        , dcterms:replaces
+        , rdfs:label
+        , rdfs:comment
+        , hoco:dischargesStartQuarter
+        , hoco:dischargesStartDate
+        , hoco:dischargesEndQuarter
+        , hoco:dischargesEndDate
+    .
+
+<metric-by-id> a api:ItemEndpoint
+    ; api:exampleRequestPath "/doc/metric/1"
+    ; api:uriTemplate "/doc/metric/{id}"
+    ; api:itemTemplate "http://healthdata.gov/id/metric/{id}"
+    ; api:defaultViewer <metric-default-viewer>
+    ; api:viewer <metric-default-viewer>, <noneViewer>
+    .
+
+<metric-default-viewer>  a api:Viewer
+    ; api:name "all"
+    ; api:property  rdf:type
+        , dcterms:replaces
+        , rdfs:label
+        , rdfs:comment
+    .    
+    
+<def-ontology> a api:ItemEndpoint
+    ; api:exampleRequestPath "/def/hospital/"
+    ; api:uriTemplate "/def/{ontology}/"
+    ; api:itemTemplate "http://healthdata.gov/def/{ontology}/"
+    ; api:defaultViewer <def-ontology-default-viewer>
+    ; api:viewer <def-ontology-default-viewer>, <noneViewer>
+    .
+    
+<def-ontology-default-viewer> a api:Viewer
+    ; api:name "ontologyViewer"
+    ; api:property  rdf:type
+        , dcterms:replaces
+        , owl:versionInfo
+        , owl:imports
+        , rdfs:isDefinedBy
+        , rdfs:seeAlso
+        , dc:title
+        , dc:contributor
+    .
+    
+<def-ontology-thing> a api:ItemEndpoint
+    ; api:exampleRequestPath "/def/hospital/Hospital"
+    ; api:uriTemplate "/def/{ontology}/{thing}"
+    ; api:itemTemplate "http://healthdata.gov/def/{ontology}/{thing}"
+    ; api:defaultViewer <def-ontology-default-viewer>
+    ; api:viewer <def-ontology-default-viewer>, <noneViewer>
+    .
+
+<def-ontology-default-viewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdf:type
+        , rdfs:subClassOf
+        , dcterms:replaces
+        , rdfs:comment
+        , rdfs:label
+    .  
+    
+<recordsetEndpoint> a api:ItemEndpoint
+    ; api:exampleRequestPath "http://healthdata.gov/dataset/cacn/2010-11-16/recordset/1"
+    ; api:uriTemplate "/dataset/{src}/{date}/recordset/{recordset}"
+    ; api:itemTemplate "http://healthdata.gov/dataset/{src}/{date}/recordset/{recordset}"
+    ; api:defaultViewer <recordset-default-viewer>
+    ; api:viewer <recordset-default-viewer>, <recordset-simple-viewer>, <noneViewer>
+    . 
+
+<recordset-default-viewer> a api:Viewer
+       ; api:name "all"
+       ; api:property  rdf:type
+          , (comp:metric rdfs:comment)
+          , (comp:measure rdfs:comment)
+          , (comp:condition rdfs:comment)
+          , (comp:footnote rdfs:label)
+          , gd:percentage
+          , (hoco:record comp:metric rdfs:comment)
+          , (hoco:record comp:measure rdfs:comment)
+          , (hoco:record comp:condition rdfs:comment)
+          , (hoco:record gd:percentage)
+          , (hoco:record comp:footnote rdfs:label)
+          , (hoco:record comp:footnote rdfs:comment)
+          , (hoco:record gd:count)
+          , (hoco:record hoco:stateCount)
+          , (hoco:record gd:denominator)
+          , (hoco:record hoco:denominator)
+          , (hoco:record hoco:numerator)
+          , (hoco:record hoco:ratio)
+          , (hoco:record hoco:NationalRate)
+          , (hoco:record hoco:confidenceRateLower)
+          , (hoco:record hoco:confidenceRateUpper)
+          , (hoco:record hoco:deviceDaysCount)
+          , (hoco:record hoco:eligcasesRate)
+          , (hoco:record hoco:sirRate)
+          , (hoco:record hoco:medianTime)
+          , (hoco:record hoco:msdrg rdfs:label)
+          , (hoco:record hoco:msdrg rdfs:comment)
+          , (hoco:record hoco:nationalCount)
+          , (hoco:record hoco:paymentRangeHigh)
+          , (hoco:record hoco:paymentRangeLow)
+          , (hoco:record hoco:admissions)
+          , (hoco:record hoco:rsrrHigh)
+          , (hoco:record hoco:rsrrLow)
+          , (hoco:record hoco:rsmrHigh)
+          , (hoco:record hoco:rsmrLow)
+          , (hoco:record gd:countyCode)
+          , (hoco:record gd:stateCode)
+          , (hoco:record hoco:medianPayment)
+          , (hoco:record hoco:endQuarter)
+          , (hoco:record hoco:startQuarter)
+    .
+
+
+<recordset-simple-viewer> a api:Viewer
+       ; api:name "short"
+       ; api:property  rdf:type
+          , (comp:metric rdfs:comment)
+          , (comp:measure rdfs:comment)
+          , (comp:condition rdfs:comment)
+          , (comp:footnote rdfs:label)
+          , gd:percentage
+          , hoco:record
+    .
+
+
+<recordEndpoint> a api:ItemEndpoint
+    ; api:exampleRequestPath "http://healthdata.gov/dataset/cacn/2010-11-16/recordset/1/record/2"
+    ; api:uriTemplate "/dataset/{src}/{date}/recordset/{recordset}/record/{record}"
+    ; api:itemTemplate "http://healthdata.gov/dataset/{src}/{date}/recordset/{recordset}/record/{record}"
+    ; api:defaultViewer <record-default-viewer>
+    ; api:viewer <record-default-viewer>, <noneViewer>
+    .     
+
+<record-default-viewer> a api:Viewer
+       ; api:name "all"
+       ; api:property  rdf:type
+          , (comp:metric rdfs:comment)
+          , (comp:measure rdfs:comment)
+          , (comp:condition rdfs:comment)
+          , (comp:footnote rdfs:label)
+          , (comp:footnote rdfs:comment)
+          , gd:count
+          , gd:percentage
+          , hoco:stateCount
+          , gd:denominator
+          , hoco:denominator
+          , hoco:numerator
+          , hoco:ratio
+          , hoco:NationalRate
+          , hoco:confidenceRateLower
+          , hoco:confidenceRateUpper
+          , hoco:deviceDaysCount
+          , hoco:eligcasesRate
+          , hoco:sirRate
+          , hoco:medianTime
+          , (hoco:msdrg rdfs:label)
+          , (hoco:msdrg rdfs:comment)
+          , hoco:nationalCount
+          , hoco:paymentRangeHigh
+          , hoco:paymentRangeLow
+          , hoco:admissions
+          , hoco:rsrrHigh
+          , hoco:rsrrLow
+          , hoco:rsmrHigh
+          , hoco:rsmrLow
+          , gd:countyCode
+          , gd:stateCode
+          , hoco:medianPayment
+          , hoco:endQuarter
+          , hoco:startQuarter
+    .
+    
+<datasetTypeEndpoint> a api:ItemEndpoint
+    ; api:exampleRequestPath "http://healthdata.gov/dataset/cacn"
+    ; api:uriTemplate "/dataset/{src}"
+    ; api:itemTemplate "http://healthdata.gov/dataset/{src}"
+    ; api:defaultViewer <datasetType-default-viewer>
+    ; api:viewer <datasetType-default-viewer>, <noneViewer>
+    . 
+    
+<datasetType-default-viewer> a api:Viewer
+       ; api:name "all"
+       ; api:property  rdfs:label
+          , dcterms:title
+          , foaf:primaryTopic
+          , dcterms:description
+          , void:vocabulary
+          , void:dataset
+          , rdf:type
+    .
+    
+<datasourceEndpoint> a api:ItemEndpoint
+    ; api:exampleRequestPath "http://healthdata.gov/dataset/cacn/2010-11-16"
+    ; api:uriTemplate "/dataset/{src}/{date}"
+    ; api:itemTemplate "http://healthdata.gov/dataset/{src}/{date}"    
+    ; api:defaultViewer <datasource-default-viewer>
+    ; api:viewer <datasource-default-viewer>, <datasource-simple-viewer>, <noneViewer>
+    . 
+    
+<datasource-default-viewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdfs:label
+    	, dcterms:issued
+    	, void:classes
+    	, void:distinctObjects
+    	, void:distinctSubjects
+    	, void:entities
+    	, void:properties
+    	, void:triples
+    	, rdfs:comment
+    	, dcterms:description
+    	, dcterms:title
+    	, rdfs:type
+    	, void:dataDump
+    	, foaf:homepage
+    	, void:dataset
+    	, foaf:isPrimaryTopicOf
+    	, foaf:primaryTopic
+    	, void:sparqlEndpoint
+    	, void:vocabulary
+    	, rdf:type
+    .
+    
+<datasource-simple-viewer> a api:Viewer
+    ; api:name "short"
+    ; api:property  rdfs:label
+    	, dcterms:issued
+    	, void:classes
+    	, dcterms:description
+    	, dcterms:title
+    	, rdfs:type
+    	, void:dataDump
+    	, foaf:homepage
+    	, void:dataset
+    	, foaf:isPrimaryTopicOf
+    	, foaf:primaryTopic
+    	, void:sparqlEndpoint
+    	, void:vocabulary
+    	, rdf:type
+    .
+
+<noneViewer> a api:Viewer
+    ; api:name "none"
+    .
+       
+<hospitalShortViewer> a api:Viewer
+    ; api:name "short"
+    ; api:property  rdf:type
+          , rdfs:label
+          , (hosp:site ns:siteAddress vcard:longitude)
+          , (hosp:site ns:siteAddress vcard:latitude)
+    .  
+          
+          
+<hospitalMediumViewer> a api:Viewer
+    ; api:name "medium"
+    ; api:property  rdfs:label
+          , gd:stateCode
+          , hosp:emergencyServices
+          , (hosp:type rdfs:label)
+          , (hosp:site ns:siteAddress vcard:street-address)
+          , (hosp:site ns:siteAddress vcard:locality)
+          , (hosp:site ns:siteAddress vcard:postal-code)
+          , (hosp:site ns:siteAddress vcard:tel)
+          , (hosp:site ns:siteAddress vcard:longitude)
+          , (hosp:site ns:siteAddress vcard:latitude)
+          , rdf:type
+    . 
+
+
+<siteMediumViewer> a api:Viewer
+    ; api:name "medium"
+    ; api:property  rdfs:label
+          , rdf:type
+          , (ns:siteAddress vcard:street-address)
+          , (ns:siteAddress vcard:locality)
+          , (ns:siteAddress vcard:postal-code)
+          , (ns:siteAddress vcard:tel)
+          , (ns:siteAddress vcard:longitude)
+          , (ns:siteAddress vcard:latitude)
+    .
+  
+<vcardMediumViewer> a api:Viewer
+    ; api:name "medium"
+    ; api:property  rdfs:label
+          , rdf:type
+          , vcard:street-address
+          , vcard:locality
+          , vcard:postal-code
+          , vcard:tel
+          , vcard:longitude
+          , vcard:latitude
+    .
+  
+  
+<hospitalGeoViewer> a api:Viewer
+    ; api:name "geo"
+    ; api:property  rdfs:label
+          , gd:stateCode
+          , hosp:emergencyServices
+          , (hosp:type rdf:type)
+          , (hosp:site ns:siteAddress vcard:longitude)
+          , (hosp:site ns:siteAddress vcard:latitude)
+          , rdf:type
+    .
+    
+<hospitalAllViewer> a api:Viewer
+    ; api:name "all"
+    ; api:property  rdfs:label
+          , gd:stateCode
+          , hosp:emergencyServices
+          , hosp:hasCac
+          , hosp:hasMpv
+          , (hosp:ownership rdfs:label)
+          , hoco:recordset
+          , dcterms:replaces
+          , (hosp:type rdfs:label)
+          , (hosp:site ns:siteAddress vcard:street-address)
+          , (hosp:site ns:siteAddress vcard:locality)
+          , (hosp:site ns:siteAddress vcard:postal-code)
+          , (hosp:site ns:siteAddress vcard:tel)
+          , (hosp:site ns:siteAddress vcard:longitude)
+          , (hosp:site ns:siteAddress vcard:latitude)
+          , rdf:type
+    .
+  
+<hospitals> a api:ListEndpoint 
+    ; api:uriTemplate "/def/hospital/Hospital/instances"
+    ; api:selector 
+        [ api:where """{
+     hint:Query hint:optimizer "None" .
+     { SELECT ?g WHERE { 
+        <http://healthdata.gov/dataset/hosp> void:dataset ?g. 
+        ?g dcterms:issued ?date . 
+     } ORDER BY DESC(?date) LIMIT 1 }
+     GRAPH ?g { ?item hosp:site ?site . ?item a hosp:Hospital. }
+  }""" ] 
+    ; api:defaultViewer <hospitalMediumViewer>
+    ; api:viewer <hospitalMediumViewer>, <noneViewer>, <hospitalGeoViewer>
+    .
+    
+<hospitalsNearLatLon> a api:ListEndpoint 
+    ; api:uriTemplate "/def/hospital/Hospital/lat/{lat}/long/{long}/instances"
+    ; api:variable [api:name "decimal_lat"  ; api:type xsd:decimal; api:value "{lat}" ]
+    ; api:variable [api:name "decimal_long" ; api:type xsd:decimal; api:value "{long}"]
+    ; api:selector 
+          [ api:where """ hint:Query hint:optimizer "None" .
+   { SELECT ?g WHERE {
+      <http://healthdata.gov/dataset/hosp> void:dataset ?g.
+      ?g dcterms:issued ?date .
+   } ORDER BY DESC(?date) LIMIT 1 }
+   GRAPH ?g {
+  { SELECT DISTINCT ?item WHERE {
+    { SELECT DISTINCT  ?vcard (( xsd:decimal( ?longvar ) - ?decimal_long ) as ?dlon)
+                              (( xsd:decimal( ?latvar ) - ?decimal_lat ) as ?dlat) WHERE {
+        ?vcard vcard:longitude ?longvar.       
+        FILTER ( xsd:decimal( ?longvar ) < (?decimal_long + 1.0)
+          && xsd:decimal( ?longvar ) > (?decimal_long - 1.0) ) .
+        ?vcard vcard:latitude  ?latvar. 
+        FILTER ( xsd:decimal( ?latvar ) < (?decimal_lat + 1.0)
+          && xsd:decimal( ?latvar ) > (?decimal_lat - 1.0) ) .
+     } }
+     ?site ns:siteAddress ?vcard.
+     ?item hosp:site ?site.
+  } ORDER BY ASC( ((?dlat*?dlat) + (?dlon*?dlon)) ) } 
+  }""" ] 
+    ; api:defaultViewer <hospitalMediumViewer>
+    ; api:viewer <hospitalMediumViewer>, <noneViewer>, <hospitalGeoViewer>
+    .
+    
+<conditions> a api:ListEndpoint 
+    ; api:uriTemplate "/def/compare/Condition/instances" 
+    ; api:selector 
+        [ api:where """{
+SELECT DISTINCT ?item WHERE { ?item a comp:Condition.}
+         }"""
+          ; api:orderBy "str(?item)"
+        ] 
+    ; api:defaultViewer <condition-default-viewer>
+    ; api:viewer <condition-default-viewer>, <noneViewer>
+    .
+    
+<measures> a api:ListEndpoint 
+    ; api:uriTemplate "/def/compare/Measure/instances" 
+    ; api:selector 
+        [ api:where """{
+SELECT DISTINCT ?item where { 
+  {
+    ?subClass1 rdfs:subClassOf comp:Measure.
+    ?subClass rdfs:subClassOf ?subClass1.
+    ?item a ?subClass. 
+  } UNION {
+    ?subClass rdfs:subClassOf comp:Measure.
+    ?item a ?subClass. 
+  } UNION {
+    ?item a comp:Measure.
+  }
+}
+          }"""
+#          ; api:orderBy "str(?item)"
+        ] 
+    ; api:defaultViewer <measure-default-viewer>
+    ; api:viewer <measure-default-viewer>, <noneViewer>
+    .
+    
+<metrics> a api:ListEndpoint 
+    ; api:uriTemplate "/def/compare/Metric/instances" 
+    ; api:selector 
+        [ api:where  """{ 
+SELECT DISTINCT ?item where {
+  { 
+    ?subClass1 rdfs:subClassOf comp:Metric.
+    ?subClass rdfs:subClassOf ?subClass1.
+    ?item a ?subClass.
+  } UNION {
+    ?subClass rdfs:subClassOf comp:Metric.
+    ?item a ?subClass.  
+  } UNION {
+    ?item a comp:Metric.
+  }
+}
+          }""" 
+          ; api:orderBy "str(?item)" 
+        ]
+    ; api:defaultViewer <metric-default-viewer>
+    ; api:viewer <metric-default-viewer>, <noneViewer>
+    .
+ 
+<datasetEndpoint> a api:ListEndpoint
+    ; api:uriTemplate "/dataset"
+    ; api:selector 
+        [ api:where  """{ 
+SELECT DISTINCT ?item WHERE { <http://healthdata.gov/dataset> foaf:homepage ?item. } 
+          }""" 
+          ; api:orderBy "str(?item)"
+        ]
+    ; api:defaultViewer <dataset-default-viewer>
+    ; api:viewer <dataset-default-viewer>, <noneViewer>
+    ; api:viewer [ a api:Viewer
+       ; api:name "brief"
+       ; api:property rdfs:label
+         , dcterms:title
+         , dcterms:description
+         ]
+    . 
+    
+<dataset-default-viewer> a api:Viewer
+       ; api:name "all"
+       ; api:property rdfs:label
+         , dcterms:title
+         , dcterms:description
+         , void:dataset
+         , rdf:type
+   . 
+ 
+rdf:type               a rdf:Property ; api:label "type" ; api:multiValued true ; rdfs:range rdfs:Class . 
+rdfs:label             a rdf:Property ; api:label "label" .
+rdfs:isDefinedBy       a rdf:Property ; api:label "isDefinedBy" .
+rdfs:seeAlso           a rdf:Property ; api:label "seeAlso" .
+hosp:emergencyServices a rdf:Property ; api:label "hasEmergencyServices" . 
+hosp:cacProvider       a rdf:Property ; api:label "hasCac" .
+hosp:mpvProvider       a rdf:Property ; api:label "hasMpv" .
+hosp:ownership         a rdf:Property ; api:label "ownership" ; rdfs:range rdfs:Class ; api:multiValued true . 
+comp:metric            a rdf:Property ; api:label "metric"    ; rdfs:range rdfs:Class ; api:multiValued true . 
+comp:measure           a rdf:Property ; api:label "measure"   ; rdfs:range rdfs:Class ; api:multiValued true .
+comp:condition         a rdf:Property ; api:label "condition" ; rdfs:range rdfs:Class ; api:multiValued true .
+comp:footnote          a rdf:Property ; api:label "footnote"  ; rdfs:range rdfs:Class ; api:multiValued true .
+gd:percentage          a rdf:Property ; api:label "percentage" .
+gd:count               a rdf:Property ; api:label "count" .
+hoco:stateCount        a rdf:Property ; api:label "stateCount" .
+rdfs:comment           a rdf:Property ; api:label "comment"   ; api:multiValued true .
+gd:stateCode           a rdf:Property ; api:label "stateCode" . 
+hosp:type              a rdf:Property ; api:label "hospitalType" ; rdfs:range rdfs:Class .
+hosp:site              a rdf:Property ; api:label "site"         ; rdfs:range ns:Site ; api:multiValued true .
+ns:siteAddress         a rdf:Property ; api:label "vcard"        ; rdfs:range vcard:VCard .
+vcard:latitude         a rdf:Property ; api:label "lat"  ; rdfs:range xsd:decimal .
+vcard:longitude        a rdf:Property; api:label "long"  ; rdfs:range xsd:decimal .   
+vcard:postal-code      a rdf:Property ; api:label "zip".
+vcard:tel              a rdf:Property ; api:label "phone".
+vcard:street-address   a rdf:Property ; api:label "address".
+vcard:locality         a rdf:Property ; api:label "city".  
+dcterms:title          a rdf:Property ; api:label "title".
+foaf:homepage          a rdf:Property ; api:label "dataset" ; api:type rdfs:Resource.
+void:dataset           a rdf:Property ; api:label "ReleaseDate" ;  api:type rdfs:Resource.
+dcterms:replaces       a rdf:Property ; api:label "replaces" ; api:type rdfs:Resource.
+foaf:primaryTopic      a rdf:Property ; api:label "primaryTopic".
+dcterms:description    a rdf:Property ; api:label "description".
+dcterms:issued         a rdf:Property ; api:label "issued".
+dcterms:source         a rdf:Property ; api:label "source".
+void:sparqlEndpoint    a rdf:Property ; api:label "sparqlEndpoint".
+void:vocabulary        a rdf:Property ; api:label "vocabulary".
+void:triples           a rdf:Property ; api:label "triplesCount".
+void:entities          a rdf:Property ; api:label "entitiesCount".
+void:properties        a rdf:Property ; api:label "propertyCount".
+void:distinctSubjects  a rdf:Property ; api:label "distinctSubjectCount".
+void:distinctObjects   a rdf:Property ; api:label "distinctObjectCount".
+void:classes           a rdf:Property ; api:label "classCount".
+void:dataDump          a rdf:Property ; api:label "dataDump".
+void:exampleResource   a rdf:Property ; api:label "exampleResource".
+dc:contributor         a rdf:Property ; api:label "contributor".
+dc:title               a rdf:Property ; api:label "vocabularyTitle".
+owl:imports            a rdf:Property ; api:label "imports".
+owl:versionInfo        a rdf:Property ; api:label "versionInfo".
+hoco:record            a rdf:Property ; api:label "record" ; api:type rdfs:Resource .
+hoco:recordset         a rdf:Property ; api:label "recordSet" ; api:type rdfs:Resource .
+
+gd:denominator         a rdf:Property ; api:label "denominator" .
+hoco:denominator       a rdf:Property ; api:label "aDenominator" .
+hoco:numerator         a rdf:Property ; api:label "numerator" .
+hoco:ratio             a rdf:Property ; api:label "ratio" .
+hoco:NationalRate      a rdf:Property ; api:label "nationalRate" .
+hoco:confidenceRateLower a rdf:Property ; api:label "confidenceRateLower" .
+hoco:confidenceRateUpper a rdf:Property ; api:label "confidenceRateUpper" .
+hoco:deviceDaysCount   a rdf:Property ; api:label "deviceDaysCount" .
+hoco:eligcasesRate     a rdf:Property ; api:label "eligCasesRate" .
+hoco:sirRate           a rdf:Property ; api:label "sirRate" .
+hoco:medianTime        a rdf:Property ; api:label "medianTime" .
+hoco:msdrg             a rdf:Property ; api:label "msDrg" ; api:type rdfs:Resource .
+
+hoco:nationalCount     a rdf:Property ; api:label "nationalCount" .
+hoco:paymentRangeHigh  a rdf:Property ; api:label "paymentRangeHigh" .
+hoco:paymentRangeLow   a rdf:Property ; api:label "paymentRangeLow" .
+hoco:admissions        a rdf:Property ; api:label "admissions" .
+hoco:rsrrHigh          a rdf:Property ; api:label "rsrrHigh" .
+hoco:rsrrLow           a rdf:Property ; api:label "rsrrLow" .
+hoco:rsmrHigh          a rdf:Property ; api:label "rsmrHigh" .
+hoco:rsmrLow           a rdf:Property ; api:label "rsmrLow" .
+gd:countyCode          a rdf:Property ; api:label "countyCode" .
+gd:stateCode           a rdf:Property ; api:label "stateCode" .
+hoco:medianPayment     a rdf:Property ; api:label "medianPayment" .
+hoco:endQuarter        a rdf:Property ; api:label "endQuarter" .
+hoco:startQuarter      a rdf:Property ; api:label "startQuarter" .

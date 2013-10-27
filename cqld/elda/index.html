@@ -1,0 +1,47 @@
+
+<html>
+<head>
+<title>CQLD -- Clinical Quality Linked Data</title>
+</head>
+
+<body>
+
+<h3>Clinical Quality Information about US Hospitals</h3>
+<p>
+Sample web pages that list:
+<ul>
+<li><a href="dataset">Datasets, and their Publication Dates</a></li>
+<li><a href="def/hospital/Hospital/*">Hospitals nearest your current location</a></li>
+<li><a href="def/hospital/Hospital/instances">All Hospitals</a></li>
+<li><a href="def/compare/Condition/instances">All Conditions</a></li>
+<li><a href="def/compare/Measure/instances">All Measures</a></li>
+<li><a href="def/compare/Metric/instances">All Metrics</a></li>
+</ul>
+</p>
+<p>
+Some Sample Data Served:
+<ul>
+<li><a href="dataset/cacn/2010-11-16/recordset/1">A RecordSet</a></li>
+<li><a href="dataset/cp/2011-12-22">The Metadata for a Dataset</a></li>
+</ul>
+</p>
+<p>
+The web pages linked above were created by:
+<ol>
+<li>Carving up each URI into parameters</li>
+<li>Substituting parameters into a query string</li>
+<li>Sending the query string to the SPARQL endpoint</li>
+<li>XML results are sent to an XSLT transform to create the web page</li>
+</ol>
+</p>
+<p>
+Other Links:
+<ul>
+<li>The SPARQL endpoint can be found at <img src="images/sparqlendpoint.png" alt="http://healthdata.gov/sparql"></li>
+<li><a href="sparql/">the default sparql client</a></li>
+<li><a href="sparqled">another client page to the SPARQL endpoint</a></li>
+</ul>
+</p>
+
+</body>
+</html>

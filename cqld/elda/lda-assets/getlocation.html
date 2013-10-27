@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Get Location</title>
+    <script src="../../../lda-assets/scripts/geo.js?id=1" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    <script>
+      if (geo_position_js.init()) {
+        geo_position_js.getCurrentPosition(success_callback,error_callback,{enableHighAccuracy:true,timeout:10000});
+      } else {
+        window.location = "/def/hospital/Hospital/instances";
+      }
+
+      function success_callback(p) {
+        window.location = "/def/hospital/Hospital/lat/"+p.coords.latitude.toFixed(3)+"/long/"+p.coords.longitude.toFixed(3)+"/instances";
+      }
+		
+      function error_callback(p) { 
+        window.location = "/def/hospital/Hospital/instances";
+      }
+    </script>
+  </body>
+</html>
